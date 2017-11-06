@@ -22,13 +22,13 @@
 
         <action name="index">
             <result type="redirectAction">
-                <param name="actionName">HelloWorld</param>
-                <param name="namespace">/example</param>
+                <param name="actionName">Welcome</param>
+                <param name="namespace">/Log</param>
             </result>
         </action>
     </package>
 
-    <include file="example.xml"/>
+    <include file="Log.xml"/>
 
     <!-- Add packages here -->
 
