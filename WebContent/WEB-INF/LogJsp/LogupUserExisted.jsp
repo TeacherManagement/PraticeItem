@@ -102,21 +102,21 @@
 		<table>
 			<tr>
 				<td class="lable">用户名</td>
-				<td><input type="text" name="username"></td>
+				<td><input type="text" name="username" value="${username}"></td>
 			</tr>
 			<tr>
 				<td colspan="2"><p>用户已存在</p></td>
 			</tr>
 			<tr>
 				<td class="label">密码</td>
-				<td><input type="password" name="password"></td>
+				<td><input type="password" name="password" value="${password}"></td>
 			</tr>
 			<tr>
 				<td colspan="2"><p></p></td>
 			</tr>
 			<tr>
 				<td class="lable" style="font-size:14px">确认密码</td>
-				<td><input type="password" name="verifyPassword"></td>
+				<td><input type="password" name="verifyPassword" value="${verifyPassword}"></td>
 			</tr>
 			<tr>
 				<td colspan="2"><p></p></td>

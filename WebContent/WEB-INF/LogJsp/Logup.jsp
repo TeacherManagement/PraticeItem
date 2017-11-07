@@ -123,8 +123,8 @@
 			</tr>
 		</table>
 		<div id="tors">
-		<input type="radio" name="identity" value="我是老师" checked>我是老师
-		<input type="radio" name="identity" value="我是学生">我是学生
+		<input type="radio" name="identity" value="teacher" checked>我是老师
+		<input type="radio" name="identity" value="student">我是学生
 		</div>
 		<input type="submit" value="注册">
 	</form>

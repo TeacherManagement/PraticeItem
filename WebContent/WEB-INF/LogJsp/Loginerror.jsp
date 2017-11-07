@@ -56,6 +56,12 @@
 		float:left;
 		margin-bottom:0px;
 	}
+	.log form [type=password]{
+		height:25px;
+		width:160px;
+		float:left;
+		margin-bottom:0px;
+	}
 	.log form [type=submit] {
 		background-color:#006600;
 		color:white;
@@ -92,14 +98,14 @@
 		<table>
 			<tr>
 				<td class="lable">用户名</td>
-				<td><input type="text" name="username"></td>
+				<td><input type="text" name="username" value="${username}"></td>
 			</tr>
 			<tr>
 				<td colspan="2"><p></p></td>
 			</tr>
 			<tr>
 				<td class="lable">密码</td>
-				<td><input type="text" name="username"></td>
+				<td><input type="password" name="password" value="${password}"></td>
 			</tr>
 			<tr>
 				<td colspan="2"><p>用户名或密码错误</p></td>
