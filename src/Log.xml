@@ -11,14 +11,16 @@
             <result>/WEB-INF/LogJsp/Welcome.jsp</result>
         </action>
 		<action name="login" class="register.login">
-			<result name="SUCCESS">/WEB-INF/LogJsp/Loginsuc.jsp</result>
+			<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+			<result name="SUCCESSstudent"></result>
 			<result name="ERRORNOMATCH">/WEB-INF/LogJsp/Loginerror.jsp</result>
+			<result name="ERROREXISTED">/WEB-INF/LogJsp/Loginerror.jsp</result>
 		</action>
 		<action name="nologup">
 			<result>/WEB-INF/LogJsp/Logup.jsp</result>
 		</action>
 		<action name="logup" class="register.logup">
-			<result name="SUCCESS">/WEB-INF/LogJsp/Loginsuc.jsp</result>
+			<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
 			<result name="ERROREXISTED">/WEB-INF/LogJsp/LogupUserExisted.jsp</result>
 			<result name="ERRORNOMATCH">/WEB-INF/LogJsp/LogupNoMatch.jsp</result>
 			

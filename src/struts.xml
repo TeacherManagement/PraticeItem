@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-
+	
     <constant name="struts.enable.DynamicMethodInvocation" value="false" />
     <constant name="struts.devMode" value="true" />
 
@@ -13,7 +13,7 @@
         <default-action-ref name="index" />
 
         <global-results>
-            <result name="error">/WEB-INF/jsp/error.jsp</result>
+            <result name="error">/WEB-INF/error.jsp</result>
         </global-results>
 
         <global-exception-mappings>
@@ -29,7 +29,7 @@
     </package>
 
     <include file="Log.xml"/>
-
+	<include file="teacher.xml"/>
     <!-- Add packages here -->
 
 </struts>
