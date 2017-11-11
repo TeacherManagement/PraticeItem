@@ -12,7 +12,7 @@
         </action>
 		<action name="login" class="register.login">
 			<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
-			<result name="SUCCESSstudent"></result>
+			<result name="SUCCESSstudent">/WEB-INF/LogJsp/sLoginsuc.jsp</result>
 			<result name="ERRORNOMATCH">/WEB-INF/LogJsp/Loginerror.jsp</result>
 			<result name="ERROREXISTED">/WEB-INF/LogJsp/Loginerror.jsp</result>
 		</action>

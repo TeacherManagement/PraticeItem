@@ -30,6 +30,7 @@
 
     <include file="Log.xml"/>
 	<include file="teacher.xml"/>
+	<include file="student.xml"/>
     <!-- Add packages here -->
 
 </struts>

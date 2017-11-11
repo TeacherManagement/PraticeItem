@@ -13,7 +13,7 @@ import com.opensymphony.xwork2.ActionContext;
 
 public class login {
 	
-	
+	//登陆操作
 	public String execute() throws SQLException {
 		Connection conn = null;
 		Statement stmt = null;
@@ -47,7 +47,14 @@ public class login {
 			if (rs2.next()) {
 				String realPassword = rs2.getString("PassWord");
 				if (realPassword.equals(password))
+				{	
+					ActionContext actionContext = ActionContext.getContext();   //取到struts容器
+					java.util.Map<String, Object> session = actionContext.getSession();    //取得session
+					session.put("username", username);       //把用户数据放入session
+					
+					getStudentDbValue(conn);
 					return "SUCCESSstudent";
+				}
 				else
 					return "ERRORNOMATCH";
 			}
@@ -64,6 +71,7 @@ public class login {
 			conn.close();
 		}
 	}
+	//以下为与老师有关的操作
 	public String editTeacherBasic() throws SQLException {
 		Connection conn = null;
 		Statement stmt = null;
@@ -309,7 +317,10 @@ public class login {
 		if (school == null || school.equals(""))
 			school="暂未填写";
 		
-		if (rs.getBoolean("Gender"))
+		sex = rs.getString("Gender");
+		if (sex == null)
+			sex = "暂未填写";
+		else if (sex.equals("1"))
 			sex = "男";
 		else
 			sex = "女";
@@ -369,7 +380,140 @@ public class login {
 		if (AllAch== null || AllAch.equals(""))
 			AllAch = "暂未填写";
 	}
-
+	//以上为与老师有关的操作
+	//以下为与学生有关的操作
+	public String editStudentBasic() throws SQLException {
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String url = "jdbc:mysql://localhost:3306/sepractice?"
+					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
+			String user = "root";
+			String psw = "5810267";
+			conn = DriverManager.getConnection(url,user,psw);
+			stmt = conn.createStatement();
+			//取得用户名
+			ActionContext actionContext = ActionContext.getContext();   //取到struts容器
+			Map<String, Object> session = actionContext.getSession();    //取得session
+			username=(String) session.get("username");       //从session取得用户			
+			//更新基本信息的数据库
+			String sql = "update student set Name=\'"+name+"\',School=\'";
+			sql += school+"\',Address=\'";
+			sql += address+"\',Department=\'";
+			sql += department+"\',Major=\'";
+			sql += major+"\',Telephone=\'";
+			sql += telephone+"\' where UserName = \'"+username+"\'";
+			//System.out.println(sql);
+			stmt.executeUpdate(sql);
+			if (sex.equals("male"))
+				sql = "update student set Gender=1 where UserName=\'"+username+"\'";
+			else if (sex.equals("female"))
+				sql = "update student set Gender=0 where UserName=\'"+username+"\'";
+			else
+				sql = "";
+			if (!sql.equals(""))
+				stmt.executeUpdate(sql);
+			getStudentDbValue(conn);
+			return "SUCCESS";
+		}catch(ClassNotFoundException ex) {
+			ex.getMessage();
+			ex.printStackTrace();
+			return "ERROR";
+		}catch(SQLException e) { 
+			e.getSQLState();
+			e.printStackTrace();
+			return "ERROR";
+		}finally {
+			conn.close();
+		}
+	}
+	private void getStudentDbValue(Connection conn) throws SQLException {
+		Statement stmt = null;
+		ResultSet rs = null;
+		stmt = conn.createStatement();
+		String sql=null;
+		sql="select * from student where UserName = \'"+username+"\'";
+		rs = stmt.executeQuery(sql);
+		rs.next();
+		name = rs.getString("Name");
+		if (name == null || name.equals(""))
+			name="暂未填写";
+		
+		school = rs.getString("School");
+		if (school == null || school.equals(""))
+			school="暂未填写";
+		
+		sex = rs.getString("Gender");
+		if (sex == null)
+			sex = "暂未填写";
+		else if (sex.equals("1"))
+			sex = "男";
+		else
+			sex = "女";
+		
+		address = rs.getString("Address");
+		if (address == null || address.equals(""))
+			address="暂未填写";
+		
+		department = rs.getString("Department");
+		if (department == null || department.equals(""))
+			department="暂未填写";
+		
+		major = rs.getString("Major");
+		if (major == null || major.equals(""))
+			major="暂未填写";
+		
+		telephone = rs.getString("Telephone");
+		if (telephone == null || telephone.equals(""))
+			telephone="暂未填写";
+		
+		AllLea = rs.getString("LearningDir");
+		if (AllLea== null || AllLea.equals(""))
+			AllLea = "暂未填写";
+	}
+	public String editStudentLea() throws SQLException {
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String url = "jdbc:mysql://localhost:3306/sepractice?"
+					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
+			String user = "root";
+			String psw = "5810267";
+			conn = DriverManager.getConnection(url,user,psw);
+			stmt = conn.createStatement();
+			//取得用户名
+			ActionContext actionContext = ActionContext.getContext();   //取到struts容器
+			Map<String, Object> session = actionContext.getSession();    //取得session
+			username=(String) session.get("username");       //从session取得用户			
+			//更新基本信息的数据库
+			String sql = "update student set LearningDir =\"" + AllLea + "\" where UserName=\'"+username+"\'";
+			//System.out.println(sql);
+			stmt.executeUpdate(sql);
+			
+			getStudentDbValue(conn);
+			return "SUCCESS";
+		}catch(ClassNotFoundException ex) {
+			ex.getMessage();
+			ex.printStackTrace();
+			return "ERROR";
+		}catch(SQLException e) { 
+			e.getSQLState();
+			e.printStackTrace();
+			return "ERROR";
+		}finally {
+			conn.close();
+		}
+	}
+	public String searchByName() {
+		
+		return "SUCCESS";
+	}
+	public String searchByFilter() {
+		
+		return "SUCCESS";
+	}
 	//登陆用到的变量
 	private String username;
 	private String password;
@@ -394,6 +538,37 @@ public class login {
 	private String AllFund;
 	//科研成果用到的的变量
 	private String AllAch;
+	//学生感兴趣的学习方向
+	private String AllLea;
+	//学生依靠姓名检索教师
+	private String teacherName;
+	//不同检索方式
+	private String exeNameSearch;
+	public String getExeNameSearch() {
+		return exeNameSearch;
+	}
+	public void setExeNameSearch(String exeNameSearch) {
+		this.exeNameSearch = exeNameSearch;
+	}
+	public String getExeFilterSearch() {
+		return exeFilterSearch;
+	}
+	public void setExeFilterSearch(String exeFilterSearch) {
+		this.exeFilterSearch = exeFilterSearch;
+	}
+	private String exeFilterSearch;
+	public String getTeacherName() {
+		return teacherName;
+	}
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
+	public String getAllLea() {
+		return AllLea;
+	}
+	public void setAllLea(String allLea) {
+		AllLea = allLea;
+	}
 	public String getUsername() {
 		return username;
 	}
