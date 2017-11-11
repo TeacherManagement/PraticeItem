@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+    <package name="teacher" namespace="/teacher" extends="default">
+		<!-- <action name="editBasicInfo" class="teacherOp.editBasicInfo"> -->
+		<action name="editBasicInfo" class="register.login" method="editTeacherBasic">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+        </action>
+        
+        <action name="editHonorInfo" class="register.login" method="editTeacherHonor">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+        </action>
+        
+        <action name="editFundInfo" class="register.login" method="editTeacherFund">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+        </action>
+        
+        <action name="editCalInfo" class="register.login" method="editTeacherCal">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+        </action>
+        
+        <action name="editAchInfo" class="register.login" method="editTeacherAch">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+        </action>
+    </package>
+</struts>
