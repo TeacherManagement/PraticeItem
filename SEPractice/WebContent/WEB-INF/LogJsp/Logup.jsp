@@ -22,7 +22,7 @@
 	}
 	.log{
 		width:250px;
-		height:300px;
+		height:305px;
 		border:1px solid black;
 		background-color:black;
 		opacity:0.7;
@@ -66,7 +66,16 @@
 		float:left;
 		margin-bottom:0px;
 	}
-	.log form [type=submit] {
+	/* .log form [type=submit] {
+		background-color:#006600;
+		color:white;
+		width:75px;
+		height:35px;
+		position:relative;
+		left:155px;
+		top:20px;
+	} */
+	.log  button {
 		background-color:#006600;
 		color:white;
 		width:75px;
@@ -75,8 +84,11 @@
 		left:155px;
 		top:20px;
 	}
-	
-	.log form [type=submit]:hover {
+	/* .log form [type=submit]:hover {
+		background-color:#009966;
+		color:white;
+	} */
+	.log  button:hover {
 		background-color:#009966;
 		color:white;
 	}
@@ -91,6 +103,17 @@
 		color:green;
 	}
 </style>
+<script>
+	function verify(){
+		var p1 = document.getElementById("password").value;
+		var p2 = document.getElementById("verifyPassword").value;
+		if (p1 != p2){
+			document.getElementById("warning").innerHTML = "前后密码不一致";
+			return;
+		}
+		document.getElementById("logupInfo").submit();
+	}
+</script>
 </head>
 <body>
 <div class="header">
@@ -98,7 +121,7 @@
 </div>
 <div class="log">
 	<h1>欢迎注册</h1>
-	<form action="logup">
+	<form action="logup" id="logupInfo">
 		<table>
 			<tr>
 				<td class="lable">用户名</td>
@@ -109,25 +132,27 @@
 			</tr>
 			<tr>
 				<td class="label">密码</td>
-				<td><input type="password" name="password"></td>
+				<td><input type="password" name="password" id="password"></td>
 			</tr>
 			<tr>
 				<td colspan="2"><p></p></td>
 			</tr>
 			<tr>
 				<td class="lable" style="font-size:14px">确认密码</td>
-				<td><input type="password" name="verifyPassword"></td>
+				<td><input type="password" name="verifyPassword" id="verifyPassword"></td>
 			</tr>
 			<tr>
-				<td colspan="2"><p></p></td>
+				<td colspan="2"><p id="warning"></p></td>
 			</tr>
 		</table>
 		<div id="tors">
 		<input type="radio" name="identity" value="teacher" checked>我是老师
 		<input type="radio" name="identity" value="student">我是学生
 		</div>
-		<input type="submit" value="注册">
+		<!-- <input type="submit" value="注册"> -->
+		<!-- <button onclick="verify()">注册</button> -->
 	</form>
+	<button onclick="verify()">注册</button><br />
 	<s:a action="nologup">遇到问题？</s:a>
 </div>
 </body>

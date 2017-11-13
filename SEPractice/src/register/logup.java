@@ -6,7 +6,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+//import java.util.Map;
+import com.opensymphony.xwork2.ActionContext;
 
 public class logup {
 	private String username;
@@ -70,6 +71,9 @@ public class logup {
 				sql = "insert into student (UserName,PassWord) values (\'" + username + "\',\'" + password + "\')";
 				stmt.execute(sql);
 			}
+			ActionContext actionContext = ActionContext.getContext();   //取到struts容器
+			java.util.Map<String, Object> session = actionContext.getSession();    //取得session
+			session.put("username", username);       //把用户数据放入session
 			/*String sql = "select * from book where  = \'"+updateBook+"\'";
 			//System.out.println(sql);
 			rs = stmt.executeQuery(sql);
@@ -80,7 +84,10 @@ public class logup {
 				updateBookDate = rs.getString("PublishDate");
 				updateBookPrice = rs.getString("Price");
 			}*/
-			return "SUCCESS";
+			if (identity.equals("teacher"))
+				return "SUCCESS";
+			else
+				return "SUCCESSSTUDENT";
 		}catch(ClassNotFoundException ex) {
 			ex.getMessage();
 			ex.printStackTrace();

@@ -21,5 +21,9 @@
         <action name="editLeaInfo" class="register.login" method="editStudentLea">
         	<result name="SUCCESS">/WEB-INF/LogJsp/sLoginsuc.jsp</result>
         </action>
+        
+        <action name="showTeacherPage" class="register.login" method="showTeacherPage">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/TeacherPage.jsp</result>
+        </action>
     </package>
 </struts>

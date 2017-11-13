@@ -4,7 +4,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Map;
+
+//import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpSession;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -307,6 +311,10 @@ public class login {
 		stmt = conn.createStatement();
 		String sql="";
 		sql="select * from teacher where UserName = \'"+username+"\'";
+		/*System.out.println(sql);
+		System.out.println(sql);
+		System.out.println(sql);
+		System.out.println(sql);*/
 		rs = stmt.executeQuery(sql);
 		rs.next();
 		name = rs.getString("Name");
@@ -506,12 +514,173 @@ public class login {
 			conn.close();
 		}
 	}
-	public String searchByName() {
-		
+	public String searchByName() throws SQLException {
+		/*HttpServletRequest request;
+		HttpSession session = request.getSession(); 
+		session.setAttribute("temp", temp);	*/
+		//System.out.println(exeNameSearch);
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String url = "jdbc:mysql://localhost:3306/sepractice?"
+					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
+			String user = "root";
+			String psw = "5810267";
+			conn = DriverManager.getConnection(url,user,psw);
+		    stmt = conn.createStatement();
+			//取得用户名
+			ActionContext actionContext = ActionContext.getContext();   //取到struts容器
+			Map<String, Object> session = actionContext.getSession();    //取得session
+			username=(String) session.get("username");       //从session取得用户
+			String sql = "select UserName from teacher where Name = \'"+teacherName+"\'";
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				NameList.add(rs.getString("UserName"));
+			}
+			getStudentDbValue(conn);
+		}catch(ClassNotFoundException ex) {
+			ex.getMessage();
+			ex.printStackTrace();
+			return "ERROR";
+		}catch(SQLException e) { 
+			e.getSQLState();
+			e.printStackTrace();
+			return "ERROR";
+		}finally {
+			conn.close();
+		}
 		return "SUCCESS";
 	}
-	public String searchByFilter() {
-		
+	public String searchByFilter() throws SQLException {
+		Connection conn = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String url = "jdbc:mysql://localhost:3306/sepractice?"
+					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
+			String user = "root";
+			String psw = "5810267";
+			conn = DriverManager.getConnection(url,user,psw);
+			//取得用户名
+			ActionContext actionContext = ActionContext.getContext();   //取到struts容器
+			Map<String, Object> session = actionContext.getSession();    //取得session
+			username=(String) session.get("username");       //从session取得用户
+			getStudentDbValue(conn);
+		}catch(ClassNotFoundException ex) {
+			ex.getMessage();
+			ex.printStackTrace();
+			return "ERROR";
+		}catch(SQLException e) { 
+			e.getSQLState();
+			e.printStackTrace();
+			return "ERROR";
+		}finally {
+			conn.close();
+		}
+		return "SUCCESS";
+	}
+	public String showTeacherPage() throws SQLException {
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String url = "jdbc:mysql://localhost:3306/sepractice?"
+					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
+			String user = "root";
+			String psw = "5810267";
+			conn = DriverManager.getConnection(url,user,psw);
+		    stmt = conn.createStatement();
+			
+			String sql = "select * from teacher where UserName = \'"+requestParam+"\'";
+			System.out.println(sql);
+			username = requestParam;
+			rs = stmt.executeQuery(sql);
+			if (rs.next())
+			{
+				name = rs.getString("Name");
+				if (name == null || name.equals(""))
+					name="暂未填写";
+				
+				school = rs.getString("School");
+				if (school == null || school.equals(""))
+					school="暂未填写";
+				
+				sex = rs.getString("Gender");
+				if (sex == null)
+					sex = "暂未填写";
+				else if (sex.equals("1"))
+					sex = "男";
+				else
+					sex = "女";
+				
+				address = rs.getString("Address");
+				if (address == null || address.equals(""))
+					address="暂未填写";
+				
+				department = rs.getString("Department");
+				if (department == null || department.equals(""))
+					department="暂未填写";
+				
+				major = rs.getString("Major");
+				if (major == null || major.equals(""))
+					major="暂未填写";
+				
+				telephone = rs.getString("Telephone");
+				if (telephone == null || telephone.equals(""))
+					telephone="暂未填写";
+				
+				homepage = rs.getString("Homepage");
+				if (homepage == null || homepage.equals(""))
+					homepage="暂未填写";
+				
+				if (rs.getBoolean("SciAcademician"))
+					SciAcademician = "科学院院士";
+				else
+					SciAcademician = "";
+				
+				if (rs.getBoolean("EngAcademician"))
+					EngAcademician = "工程院院士";
+				else
+					EngAcademician = "";
+				
+				if (rs.getBoolean("YangtzeScholor"))
+					YangtzeScholor = "长江学者";
+				else
+					YangtzeScholor = "";
+				if (rs.getBoolean("DrSupervisor"))
+					DrSupvisor = "博士生导师";
+				else
+					DrSupvisor = "";
+	
+				MyHonor = rs.getString("AcademicTitle");
+				if (MyHonor == null || MyHonor.equals(""))
+					MyHonor = "暂未填写";
+				
+				AllCal = rs.getString("Calendar");
+				if (AllCal == null || AllCal.equals(""))
+					AllCal = "暂未填写";
+				
+				AllFund = rs.getString("Fund");
+				if (AllFund== null || AllFund.equals(""))
+					AllFund = "暂未填写";
+				
+				AllAch = rs.getString("SciAchievement");
+				if (AllAch== null || AllAch.equals(""))
+					AllAch = "暂未填写";
+			}
+		}catch(ClassNotFoundException ex) {
+			ex.getMessage();
+			ex.printStackTrace();
+			return "ERROR";
+		}catch(SQLException e) { 
+			e.getSQLState();
+			e.printStackTrace();
+			return "ERROR";
+		}finally {
+			conn.close();
+		}
 		return "SUCCESS";
 	}
 	//登陆用到的变量
@@ -544,6 +713,29 @@ public class login {
 	private String teacherName;
 	//不同检索方式
 	private String exeNameSearch;
+	private String exeFilterSearch;
+	private ArrayList<String> NameList = new ArrayList<String>();
+	private ArrayList<String> FilterList = new ArrayList<String>();
+	private String requestParam;
+	
+	public String getRequestParam() {
+		return requestParam;
+	}
+	public void setRequestParam(String requestParam) {
+		this.requestParam = requestParam;
+	}
+	public ArrayList<String> getFilterList() {
+		return FilterList;
+	}
+	public void setFilterList(ArrayList<String> filterList) {
+		FilterList = filterList;
+	}
+	public ArrayList<String> getNameList() {
+		return NameList;
+	}
+	public void setNameList(ArrayList<String> nameList) {
+		NameList = nameList;
+	}
 	public String getExeNameSearch() {
 		return exeNameSearch;
 	}
@@ -556,7 +748,6 @@ public class login {
 	public void setExeFilterSearch(String exeFilterSearch) {
 		this.exeFilterSearch = exeFilterSearch;
 	}
-	private String exeFilterSearch;
 	public String getTeacherName() {
 		return teacherName;
 	}
