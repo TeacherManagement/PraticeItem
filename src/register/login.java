@@ -29,13 +29,13 @@ public class login {
 		Statement stmt = null;
 		ResultSet rs1 = null,rs2 = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
-					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
-			conn = DriverManager.getConnection(url,user,psw);
-			stmt = conn.createStatement();
+			Class.forName("com.mysql.jdbc.Driver"); 
+			String url = "jdbc:mysql://localhost:3306/sepractice?" 
+					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false"; 
+			String user = "root"; 
+			String psw = "5810267"; 
+			conn = DriverManager.getConnection(url,user,psw); 
+			stmt = conn.createStatement(); 
 			String sql="select PassWord from teacher where UserName = \'"+username + "\'";
 			rs1 = stmt.executeQuery(sql);
 			if (rs1.next()) {
@@ -1948,6 +1948,7 @@ public class login {
 	public void setAllAch(ArrayList<String> allAch) {
 		AllAch = allAch;
 	}
+<<<<<<< HEAD
 	public String getAchID() {
 		return achID;
 	}
@@ -2002,4 +2003,8 @@ public class login {
 	public void setAchState(String achState) {
 		this.achState = achState;
 	}
+=======
+	
+	
+>>>>>>> 37ac2dc64a14ff566e0cb55ed9f33d348b29688f
 }

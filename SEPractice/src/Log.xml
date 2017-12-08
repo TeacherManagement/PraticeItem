@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+    <package name="Log" namespace="/Log" extends="default">
+
+        <action name="Welcome">
+            <result>/WEB-INF/LogJsp/Welcome.jsp</result>
+        </action>
+		<action name="login" class="register.login">
+			<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+			<result name="SUCCESSstudent">/WEB-INF/LogJsp/sLoginsuc.jsp</result>
+			<result name="ERRORNOMATCH">/WEB-INF/LogJsp/Loginerror.jsp</result>
+			<result name="ERROREXISTED">/WEB-INF/LogJsp/Loginerror.jsp</result>
+		</action>
+		<action name="nologup">
+			<result>/WEB-INF/LogJsp/Logup.jsp</result>
+		</action>
+		<action name="logup" class="register.logup">
+			<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+			<result name="SUCCESSSTUDENT">/WEB-INF/LogJsp/sLoginsuc.jsp</result>
+			<result name="ERROREXISTED">/WEB-INF/LogJsp/LogupUserExisted.jsp</result>
+			<result name="ERRORNOMATCH">/WEB-INF/LogJsp/LogupNoMatch.jsp</result>
+			
+		</action>
+        <!-- <action name="Login_*" method="{1}" class="example.Login">
+            <result name="input">/WEB-INF/jsp/example/Login.jsp</result>
+            <result type="redirectAction">Menu</result>
+        </action>
+
+        <action name="*" class="example.ExampleSupport">
+            <result>/WEB-INF/jsp/example/{1}.jsp</result>
+        </action> -->
+
+        <!-- Add actions here -->
+    </package>
+</struts>
