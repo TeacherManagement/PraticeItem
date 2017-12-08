@@ -7,7 +7,7 @@
 
     <package name="Log" namespace="/Log" extends="default"> 
 
-<<<<<<< HEAD
+
         <action name="Welcome">
             <result>/WEB-INF/LogJsp/Welcome.jsp</result>
         </action>
@@ -31,30 +31,7 @@
             <result name="input">/WEB-INF/jsp/example/Login.jsp</result>
             <result type="redirectAction">Menu</result>
         </action>
-=======
-        <action name="Welcome"> 
-            <result>/WEB-INF/LogJsp/Welcome.jsp</result> 
-        </action> 
-		<action name="login" class="register.login"> 
-			<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result> 
-			<result name="SUCCESSstudent"></result> 
-			<result name="ERRORNOMATCH">/WEB-INF/LogJsp/Loginerror.jsp</result> 
-			<result name="ERROREXISTED">/WEB-INF/LogJsp/Loginerror.jsp</result> 
-		</action> 
-		<action name="nologup">
-			<result>/WEB-INF/LogJsp/Logup.jsp</result> 
-		</action> 
-		<action name="logup" class="register.logup"> 
-			<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result> 
-			<result name="ERROREXISTED">/WEB-INF/LogJsp/LogupUserExisted.jsp</result> 
-			<result name="ERRORNOMATCH">/WEB-INF/LogJsp/LogupNoMatch.jsp</result> 
-			 
-		</action> 
-        <!-- <action name="Login_*" method="{1}" class="example.Login"> 
-            <result name="input">/WEB-INF/jsp/example/Login.jsp</result> 
-            <result type="redirectAction">Menu</result> 
-        </action> 
->>>>>>> 37ac2dc64a14ff566e0cb55ed9f33d348b29688f
+
 
         <action name="*" class="example.ExampleSupport"> 
             <result>/WEB-INF/jsp/example/{1}.jsp</result> 

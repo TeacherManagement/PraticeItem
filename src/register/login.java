@@ -1948,7 +1948,7 @@ public class login {
 	public void setAllAch(ArrayList<String> allAch) {
 		AllAch = allAch;
 	}
-<<<<<<< HEAD
+
 	public String getAchID() {
 		return achID;
 	}
@@ -2003,8 +2003,8 @@ public class login {
 	public void setAchState(String achState) {
 		this.achState = achState;
 	}
-=======
+
 	
 	
->>>>>>> 37ac2dc64a14ff566e0cb55ed9f33d348b29688f
+
 }
