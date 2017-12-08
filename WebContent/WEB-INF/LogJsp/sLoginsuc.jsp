@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ page import="java.util.*" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,16 +20,20 @@
 		left:15%;
 	}
 	.main {
-		background:url("../picture/hitbg.jpg") no-repeat;
+		background:url("${pageContext.request.contextPath}/picture/hitbg.jpg") no-repeat;
 		background-size:cover;
 		width:100%;
+	}
+	.main #photo {
+		position:absolute;
+		top:58px;
 	}
 	.main #studentTitle {
 		width:100%;
 		height:200px;
-		background:url("../picture/hitlogo2.jpg") no-repeat;
+		background:url("${pageContext.request.contextPath}/picture/hitlogo2.jpg") no-repeat;
 		position:relative;
-		left:10%;
+		left:13%;
 		opacity:0.8;
 	}
 	.main .operation {
@@ -96,6 +102,34 @@ function defaultSetting(){
 	document.getElementById("Basic").style.backgroundColor = "#3399cc";
 	document.getElementById("Basic").style.color = "white";
 	document.getElementById("showBasic").style.display = "block";
+	var exeNameSearch = "${exeNameSearch}";
+	var exeFilterSearch = "${exeFilterSearch}";
+	if (exeNameSearch == "eNS") {
+		document.getElementById("Basic").style.backgroundColor = "white";
+		document.getElementById("Basic").style.color = "black";
+		document.getElementById("TeacherSearch").style.backgroundColor = "#3399cc";
+		document.getElementById("TeacherSearch").style.color = "white";
+		document.getElementById("showBasic").style.display = "none";
+		document.getElementById("showTeacherSearch").style.display = "block";
+		document.getElementById("NameSearchResults").style.display = "block";
+		var NameList = "${NameList}";
+		var ele,textNode;
+		for(i = 0;i < NameList.size();i++){
+			ele = document.createElement("a");
+			textNode = document.createTextNode(NameList.get(i));
+			ele.appendChild(textNode);
+			document.getElementById("NameSearchResults").appendChild(ele);
+		}
+	}
+	if (exeFilterSearch == "eFS") {
+		document.getElementById("Basic").style.backgroundColor = "white";
+		document.getElementById("Basic").style.color = "black";
+		document.getElementById("TeacherSearch").style.backgroundColor = "#3399cc";
+		document.getElementById("TeacherSearch").style.color = "white";
+		document.getElementById("showBasic").style.display = "none";
+		document.getElementById("seniorSea").style.display = "block";
+		document.getElementById("FilterSearchResults").style.display = "block";
+	}
 }
 function show(ele){
 		var x = document.getElementById(ele);
@@ -143,7 +177,11 @@ function seniorSea(){
 	//document.getElementById("AllHonor").value = "暂未填写";
 }
 function seaName(){
-	document.getElementById("nameSea").submit;
+	document.getElementById("nameSea").submit();
+}
+function saveSea(){
+	//alert("到这了！！");
+	document.getElementById("filterOption").submit();
 }
 function cancelSea() {
 	document.getElementById("seniorSea").style.display = "none";
@@ -167,17 +205,24 @@ function cancelLea() {
 
 <body onload="defaultSetting()">
 	<div class="header">
-		<h3>学生主页${username }</h3>
+		<h3>学生${username }主页</h3>
 	</div>
 	<div class="main">
 		<div id="studentTitle">
 			
 		</div>
+		<div id="photo">
+		<img src="${pageContext.request.contextPath}/images/${username }.jpg" width="160px" height="170px">
+		<form action="fileUpload.action" method="post" enctype="multipart/form-data">
+   			<input type="file" name="photo"><br>
+   			<input type="submit" value="更新头像">
+		</form>
+	</div>
 		<!--导航栏 -->
 		<ul>
 			<li><button onclick="show('Basic')" id="Basic">基本信息</button></li>
 			<li><button onclick="show('TeacherSearch')" id="TeacherSearch">教师检索</button></li>
-			<li><button onclick="show('LearningDir')" id="LearningDir">学习方向</button></li>
+			<li><button onclick="show('LearningDir')" id="LearningDir">我的预约</button></li>
 			<div class="clear"></div>
 		</ul>
 		<!--基本信息展示页 -->
@@ -232,9 +277,28 @@ function cancelLea() {
 		<!--教师检索的页面 -->
 		<div id="showTeacherSearch" class="mainpage">
 			<form id="nameSea" action="/SEPractice/student/nameSearch">
-				教师名字：<input type="text" name="teacherName" style="height:35px;" placeholder="教师姓名">
+				教师名字：<input type="text" name="teacherName" style="height:35px;" placeholder="教师姓名" value="${teacherName}">
 				<button onclick="seaName()" name="exeNameSearch" value="eNS" class="operation" style="position:relative;top:5px;">搜索</button>
 			</form>
+			<%--依据姓名检索而得教师的信息 --%>
+			<%ArrayList<String> NameList = (ArrayList<String>)request.getAttribute("NameList");%>
+			<div id="NameSearchResults" class="mainpage">
+				<hr />
+				检索结果<br />
+				<table>
+					<tr><th>用户名</th><th>姓名</th><th>学校</th><th>学院</th><th>专业</th></tr>
+					<%for (int i = 0;i < NameList.size()/5;i++) {%>
+						<tr>
+							<td><a href="/SEPractice/student/showTeacherPage.action?requestParam=<%=NameList.get(5*i)%>" style="text-decoration:none" target="_blank"><%=NameList.get(5*i) %></a></td>
+							<td><%=NameList.get(5*i+1) %></td>
+							<td><%=NameList.get(5*i+2) %></td>
+							<td><%=NameList.get(5*i+3) %></td>
+							<td><%=NameList.get(5*i+4) %></td>
+						</tr>
+					<%} %>
+				</table>
+			</div>
+			<hr />
 			<button onclick="seniorSea()" class="operation" style="width:160px;">高级搜索</button>
 		</div>
 		<!--教师高级检索的页面 -->
@@ -246,7 +310,6 @@ function cancelLea() {
 						<option value="工程院院士">
 						<option value="长江学者">
 						<option value="博士生导师">
-						
 					</datalist>  -->
 					<h3>筛选条件</h3>
 					<input type="checkbox" name="SciAcademician" value="SA">科学院院士
@@ -255,21 +318,60 @@ function cancelLea() {
 					<input type="checkbox" name="DrSupvisor" value="DS">博士生导师
 				<button onclick="saveSea()" name="exeFilterSearch" value="eFS" class="operation">搜索</button>
 			</form>
+			<%--依据姓名检索而得教师的信息 --%>
+			<%ArrayList<String> FilterList = (ArrayList<String>)request.getAttribute("FilterList");%>
+			<div id="FilterSearchResults" class="mainpage">
+				<h3>筛选结果</h3>
+				<table>
+					<tr><th>用户名</th><th>姓名</th><th>学校</th><th>学院</th><th>专业</th></tr>
+					<%for (int i = 0;i < FilterList.size()/5;i++) {%>
+						<tr>
+							<td><a href="/SEPractice/student/showTeacherPage.action?requestParam=<%=FilterList.get(5*i)%>" style="text-decoration:none" target="_blank"><%=FilterList.get(5*i) %></a></td>
+							<td><%=FilterList.get(5*i+1) %></td>
+							<td><%=FilterList.get(5*i+2) %></td>
+							<td><%=FilterList.get(5*i+3) %></td>
+							<td><%=FilterList.get(5*i+4) %></td>
+						</tr>
+					<%} %>
+				</table>
+			</div>
 			<button onclick="cancelSea()" class="operation">取消</button>
 		</div>
-		<!--展示学生学习方向的页面 -->
+		<!--展示预约老师行程页面 -->
+		<%ArrayList<String> AllLea = (ArrayList<String>)request.getAttribute("AllLea"); %>
 		<div id="showLearningDir" class="mainpage">
-			<p>
-				${AllLea}
-			</p>
+			<%if (AllLea != null) {%>
+				<table>
+					<tr>
+						<th>预约老师</th>
+						<th>预约日期</th>
+						<th>预约时间</th>
+						<th>结束时间</th>
+						<th>事项</th>
+						<th>状态</th>
+					</tr>
+				<%for (int i=0;i < AllLea.size()/7;i++) {%>
+					<tr>
+						<td><%=AllLea.get(7*i+2) %></td>
+						<td><%=AllLea.get(7*i+3) %></td>
+						<td><%=AllLea.get(7*i+4) %></td>
+						<td><%=AllLea.get(7*i+5) %></td>
+						<td><%=AllLea.get(7*i+6) %></td>
+						<%if (AllLea.get(7*i+1).equals("1")) {%>
+							<td>未被接受</td>
+						<%} else {%>
+							<td><b>已被接受</b></td>
+						<%} %>
+					</tr>
+				<%} %>
+				</table>
+			<%} %>
 			<button onclick="editLea()" class="operation">修改</button>
 		</div>
-		<!--修改学习方向的页面 -->
+		<!--修改预约老师行程页面 -->
 		<div id="editLea" class="mainpage">
 			<form id="LeaInfo" action="/SEPractice/student/editLeaInfo">
-				<textarea name="AllLea" id="AllLea">
-					${AllLea}
-				</textarea><br />
+				
 				<button onclick="saveLea()" class="operation">保存</button>
 			</form>
 			<button onclick="cancelLea()" class="operation">取消</button>

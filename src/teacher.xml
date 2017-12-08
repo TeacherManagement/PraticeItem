@@ -9,20 +9,77 @@
 		<action name="editBasicInfo" class="register.login" method="editTeacherBasic">
         	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
         </action>
-        
+        <!-- 修改教师四大荣誉称号的动作类 -->
         <action name="editHonorInfo" class="register.login" method="editTeacherHonor">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+        </action>
+        <action name="addHonorInfo" class="register.login" method="addTeacherHonor">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+        </action>
+        <action name="changeHonorInfo" class="register.login" method="changeTeacherHonor">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+        </action>
+        <action name="delHonorInfo" class="register.login" method="delTeacherHonor">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+        </action>
+         
+        <!-- 名为编辑教师行程信息，实为添加新的教师行程到教室行程表中 -->
+        <action name="editCalInfo" class="register.login" method="editTeacherCal">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+        </action>
+        <!-- 删除教师的某一特定行程 -->
+        <action name="deleteCalInfo" class="register.login" method="deleteTeacherCal">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+        </action>
+        <!-- 发布教师的某一特定行程 -->
+        <action name="releaseCalInfo" class="register.login" method="releaseTeacherCal">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+        </action>
+        <!-- 取消发布教师的某一特定行程 -->
+        <action name="cancelrelCalInfo" class="register.login" method="cancelrelTeacherCal">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+        </action>
+        <!-- 接受某一学生的预约 -->
+        <action name="acceptCalInfo" class="register.login" method="acceptTeacherCal">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+        </action>
+        <!-- 拒绝某一学生的预约 -->
+        <action name="rejectCalInfo" class="register.login" method="rejectTeacherCal">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+        </action>
+        <!--教师查看预约自己的学生页面  -->
+        <action name="showStudent" class="register.login" method="showStudentPage">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/StudentPage.jsp</result>
+        </action>
+        <action name="batchCalDel" class="register.login" method="batchCalDelete">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+        </action>
+        
+        <action name="batchCalRel" class="register.login" method="batchCalRelease">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+        </action>
+        
+        <action name="batchCalCancelRel" class="register.login" method="batchCalCanRel">
         	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
         </action>
         
         <action name="editFundInfo" class="register.login" method="editTeacherFund">
         	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
         </action>
-        
-        <action name="editCalInfo" class="register.login" method="editTeacherCal">
+        <action name="delFundInfo" class="register.login" method="delTeacherFund">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+        </action>
+        <action name="addFundInfo" class="register.login" method="addTeacherFund">
         	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
         </action>
         
         <action name="editAchInfo" class="register.login" method="editTeacherAch">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+        </action>
+        <action name="addAchInfo" class="register.login" method="addTeacherAch">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+        </action>
+        <action name="delAchInfo" class="register.login" method="delTeacherAch">
         	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
         </action>
     </package>

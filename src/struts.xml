@@ -26,6 +26,10 @@
                 <param name="namespace">/Log</param>
             </result>
         </action>
+        <action name="fileUpload" class="register.login" method="upload">
+        	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
+        	<result name="sSUCCESS">/WEB-INF/LogJsp/sLoginsuc.jsp</result> 
+        </action>
     </package>
 
     <include file="Log.xml"/>
