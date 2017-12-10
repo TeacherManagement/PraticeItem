@@ -420,7 +420,7 @@ function changeAch(id){
 		<h3>教师 ${username}主页</h3>
 	</div>
 	<div id="photo">
-		<img src="../images/${username }.jpg" width="160px" height="170px">
+		<img src="${pageContext.request.contextPath}/images/${username }.jpg" width="160px" height="170px">
 		<form action="fileUpload.action" method="post" enctype="multipart/form-data">
    			<input type="file" name="photo"><br>
    			<input type="submit" value="更新头像">

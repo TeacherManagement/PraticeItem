@@ -114,7 +114,6 @@ public class login {
         //普通字段：
         //上传字段：上传到某个文件夹。存到应用的images目录下
         String realPath = ServletActionContext.getServletContext().getRealPath("/images");
-        //System.out.println(realPath);
         File directory = new File(realPath);
         if(!directory.exists()){
             directory.mkdirs();
@@ -391,6 +390,7 @@ public class login {
 	public String deleteTeacherCal() throws SQLException {
 		Connection conn = null;
 		Statement stmt = null;
+		ResultSet rs = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306/sepractice?"
@@ -403,11 +403,20 @@ public class login {
 			ActionContext actionContext = ActionContext.getContext();   //取到struts容器
 			Map<String, Object> session = actionContext.getSession();    //取得session
 			username=(String) session.get("username");       //从session取得用户			
+			String sql = "select * from "+username+"cal where CalID='"+calID+"';";
+			rs = stmt.executeQuery(sql);
+			//System.out.println(rs.getString("Booked"));
+			if (rs.next() && rs.getString("Booked") != null) {
+				sql="delete from "+rs.getString("BookUser")+"books where "
+						+"BookDate='"+rs.getString("Date")+"' and "
+						+"BookStart='"+rs.getString("Time")+"' and "
+						+"BookEnd='"+rs.getString("EndTime")+"' and "
+						+"BookItem='"+rs.getString("Bea")+"';";
+				stmt.executeUpdate(sql);
+			}
 			//删除教师行程表中指定id的行程
-			String sql = "delete from "+username+"cal where CalID='"+calID+"';";
-			//System.out.println(sql);
+			sql = "delete from "+username+"cal where CalID='"+calID+"';";
 			stmt.executeUpdate(sql);
-			
 			getTeacherDbValue(conn);
 			return "SUCCESS";
 		}catch(ClassNotFoundException ex) {

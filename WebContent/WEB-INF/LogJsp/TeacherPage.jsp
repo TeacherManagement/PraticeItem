@@ -142,7 +142,7 @@ function sureBook(){
 
 <body onload="defaultSetting()">
 	<div class="header">
-		<h3>教师主页 ${username}</h3>
+		<h3>教师主页 ${visited}</h3>
 	</div>
 	<div class="main">
 		<div id="teacherTitle">

@@ -124,7 +124,7 @@ function show(ele){
 
 <body onload="defaultSetting()">
 	<div class="header">
-		<h3>学生${username }主页</h3>
+		<h3>学生${visited }主页</h3>
 	</div>
 	<div class="main">
 		<div id="studentTitle">
@@ -136,7 +136,7 @@ function show(ele){
 		<!--导航栏 -->
 		<ul>
 			<li><button onclick="show('Basic')" id="Basic">基本信息</button></li>
-			<li><button onclick="show('LearningDir')" id="LearningDir">学习方向</button></li>
+			<li><button onclick="show('LearningDir')" id="LearningDir">TA的预约</button></li>
 			<div class="clear"></div>
 		</ul>
 		<!--基本信息展示页 -->
@@ -172,11 +172,35 @@ function show(ele){
 				</tr>
 			</table>
 		</div>
-		<!--展示学生学习方向的页面 -->
+		<%ArrayList<String> AllLea = (ArrayList<String>)request.getAttribute("AllLea"); %>
+		<!--展示学生预约老师的页面 -->
 		<div id="showLearningDir" class="mainpage">
-			<p>
-				${AllLea}
-			</p>
+			<%if (AllLea != null) {%>
+				<table>
+					<tr>
+						<th>预约老师</th>
+						<th>预约日期</th>
+						<th>预约时间</th>
+						<th>结束时间</th>
+						<th>事项</th>
+						<th>状态</th>
+					</tr>
+				<%for (int i=0;i < AllLea.size()/7;i++) {%>
+					<tr>
+						<td><%=AllLea.get(7*i+2) %></td>
+						<td><%=AllLea.get(7*i+3) %></td>
+						<td><%=AllLea.get(7*i+4) %></td>
+						<td><%=AllLea.get(7*i+5) %></td>
+						<td><%=AllLea.get(7*i+6) %></td>
+						<%if (AllLea.get(7*i+1).equals("1")) {%>
+							<td>未被接受</td>
+						<%} else {%>
+							<td><b>已被接受</b></td>
+						<%} %>
+					</tr>
+				<%} %>
+				</table>
+			<%} %>
 		</div>
 		
 	</div>
