@@ -60,7 +60,6 @@ public class login {
 					ActionContext actionContext = ActionContext.getContext();   //取到struts容器
 					java.util.Map<String, Object> session = actionContext.getSession();    //取得session
 					session.put("username", username);       //把用户数据放入session
-					
 					getStudentDbValue(conn);
 					return "SUCCESSstudent";
 				}
@@ -1100,7 +1099,6 @@ public class login {
 			MyHonor.add(rs.getString("Date"));
 			MyHonor.add(rs.getString("HonorItem"));
 		}
-		//System.out.println(MyHonor);
 		//查询老师所有的基金
 		//AllFund.clear();
 		sql = "select * from "+username+"fund;";
@@ -1112,8 +1110,6 @@ public class login {
 			AllFund.add(rs.getString("FundDate"));
 			AllFund.add(rs.getString("FundMoney"));
 		}
-		AllFund.get(1);
-		//System.out.println(AllFund);
 		//查询老师所有的科研项目
 		sql = "select * from "+username+"ach";
 		rs = stmt.executeQuery(sql);

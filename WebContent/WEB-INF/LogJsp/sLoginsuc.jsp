@@ -286,6 +286,7 @@ function cancelLea() {
 				<hr />
 				检索结果<br />
 				<table>
+					<%if (NameList != null) {%>
 					<tr><th>用户名</th><th>姓名</th><th>学校</th><th>学院</th><th>专业</th></tr>
 					<%for (int i = 0;i < NameList.size()/5;i++) {%>
 						<tr>
@@ -295,6 +296,7 @@ function cancelLea() {
 							<td><%=NameList.get(5*i+3) %></td>
 							<td><%=NameList.get(5*i+4) %></td>
 						</tr>
+					<%} %>
 					<%} %>
 				</table>
 			</div>
@@ -323,6 +325,7 @@ function cancelLea() {
 			<div id="FilterSearchResults" class="mainpage">
 				<h3>筛选结果</h3>
 				<table>
+					<%if (FilterList != null) {%>
 					<tr><th>用户名</th><th>姓名</th><th>学校</th><th>学院</th><th>专业</th></tr>
 					<%for (int i = 0;i < FilterList.size()/5;i++) {%>
 						<tr>
@@ -332,6 +335,7 @@ function cancelLea() {
 							<td><%=FilterList.get(5*i+3) %></td>
 							<td><%=FilterList.get(5*i+4) %></td>
 						</tr>
+					<%} %>
 					<%} %>
 				</table>
 			</div>
