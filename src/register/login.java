@@ -20,6 +20,7 @@ import com.opensymphony.xwork2.ActionContext;
 
 //import com.opensymphony.xwork2.ActionContext;
 
+//老师和学生登录之后的所有可选操作
 
 public class login {
 	
@@ -109,7 +110,6 @@ public class login {
 		}finally {
 			conn.close();
 		}
-		//System.out.println(photoFileName+":"+photoContentType);
         //普通字段：
         //上传字段：上传到某个文件夹。存到应用的images目录下
         String realPath = ServletActionContext.getServletContext().getRealPath("/images");
@@ -153,7 +153,6 @@ public class login {
 			sql += major+"\',Telephone=\'";
 			sql += telephone+"\',Homepage=\'";
 			sql += homepage+"\' where UserName = \'"+username+"\'";
-			//System.out.println(sql);
 			stmt.executeUpdate(sql);
 			if (sex.equals("male"))
 				sql = "update teacher set Gender=1 where UserName=\'"+username+"\'";
@@ -195,35 +194,31 @@ public class login {
 			//更新基本信息的数据库
 			String sql;
 			//String sql = "update teacher set AcademicTitle =\"" + MyHonor + "\" where UserName=\'"+username+"\'";
-			//System.out.println(sql);
-			//stmt.executeUpdate(sql);
+
 			
 			if (SciAcademician != null && SciAcademician.equals("SA"))
 				sql = "update teacher set SciAcademician=1 where UserName=\'"+username+"\'";
 			else
 				sql = "update teacher set SciAcademician=0 where UserName=\'"+username+"\'";
-			//System.out.println(sql);
+
 			stmt.executeUpdate(sql);
 			
 			if (EngAcademician != null && EngAcademician.equals("EA"))
 				sql = "update teacher set EngAcademician=1 where UserName=\'"+username+"\'";
 			else
 				sql = "update teacher set EngAcademician=0 where UserName=\'"+username+"\'";
-			//System.out.println(sql);
 			stmt.executeUpdate(sql);
 
 			if (YangtzeScholor != null && YangtzeScholor.equals("YS"))
 				sql = "update teacher set YangtzeScholor=1 where UserName=\'"+username+"\'";
 			else
 				sql = "update teacher set YangtzeScholor=0 where UserName=\'"+username+"\'";
-			//System.out.println(sql);
 			stmt.executeUpdate(sql);
 			
 			if (DrSupvisor != null && DrSupvisor.equals("DS"))
 				sql = "update teacher set DrSupervisor=1 where UserName=\'"+username+"\'";
 			else
 				sql = "update teacher set DrSupervisor=0 where UserName=\'"+username+"\'";
-			//System.out.println(sql);
 			stmt.executeUpdate(sql);
 			
 			getTeacherDbValue(conn);
@@ -293,7 +288,6 @@ public class login {
 			String sql = "UPDATE "+username+"honor set Date='"
 						+honorDate+"',HonorItem='"
 						+honorItem+"' where HonorID='"+honorID+"';";
-			//System.out.println(sql);
 			stmt.executeUpdate(sql);
 			
 			getTeacherDbValue(conn);
@@ -328,7 +322,6 @@ public class login {
 			username=(String) session.get("username");       //从session取得用户			
 			//更新基本信息的数据库
 			String sql = "DELETE FROM "+username+"honor WHERE HonorID='"+honorID+"';";
-			//System.out.println(sql);
 			stmt.executeUpdate(sql);
 			
 			getTeacherDbValue(conn);
@@ -368,7 +361,6 @@ public class login {
 						+newTime+"\',\'"
 						+newEndTime+"\',\'"
 						+newBea+"\');";
-			//System.out.println(sql);
 			stmt.executeUpdate(sql);
 			
 			getTeacherDbValue(conn);
@@ -404,7 +396,6 @@ public class login {
 			username=(String) session.get("username");       //从session取得用户			
 			String sql = "select * from "+username+"cal where CalID='"+calID+"';";
 			rs = stmt.executeQuery(sql);
-			//System.out.println(rs.getString("Booked"));
 			if (rs.next() && rs.getString("Booked") != null) {
 				sql="delete from "+rs.getString("BookUser")+"books where "
 						+"BookDate='"+rs.getString("Date")+"' and "
@@ -448,7 +439,6 @@ public class login {
 			username=(String) session.get("username");       //从session取得用户			
 			//发布教师行程表中指定id的行程
 			String sql = "update "+username+"cal set Released = '1' where CalID = '"+calID+"';";
-			//System.out.println(sql);
 			stmt.executeUpdate(sql);
 			
 			getTeacherDbValue(conn);
@@ -483,7 +473,6 @@ public class login {
 			username=(String) session.get("username");       //从session取得用户			
 			//发布教师行程表中指定id的行程
 			String sql = "update "+username+"cal set Released = '0' where CalID = '"+calID+"';";
-			//System.out.println(sql);
 			stmt.executeUpdate(sql);
 			
 			getTeacherDbValue(conn);
@@ -917,7 +906,6 @@ public class login {
 					+achRole+"','"
 					+achMoney+"','"
 					+achState+"');";
-			//System.out.println(sql);
 			stmt.executeUpdate(sql);
 			getTeacherDbValue(conn);
 			return "SUCCESS";
@@ -1152,7 +1140,6 @@ public class login {
 			sql += department+"\',Major=\'";
 			sql += major+"\',Telephone=\'";
 			sql += telephone+"\' where UserName = \'"+username+"\'";
-			//System.out.println(sql);
 			stmt.executeUpdate(sql);
 			if (sex.equals("male"))
 				sql = "update student set Gender=1 where UserName=\'"+username+"\'";
@@ -1244,7 +1231,6 @@ public class login {
 			username=(String) session.get("username");       //从session取得用户			
 			//更新基本信息的数据库
 			String sql = "update student set LearningDir =\"" + AllLea + "\" where UserName=\'"+username+"\'";
-			//System.out.println(sql);
 			stmt.executeUpdate(sql);
 			
 			getStudentDbValue(conn);
@@ -1265,7 +1251,6 @@ public class login {
 		/*HttpServletRequest request;
 		HttpSession session = request.getSession(); 
 		session.setAttribute("temp", temp);	*/
-		//System.out.println(exeNameSearch);
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -1367,7 +1352,6 @@ public class login {
 					FilterList.add(rs.getString("Department"));
 					FilterList.add(rs.getString("Major"));
 				}
-				//System.out.println(FilterList);
 			}
 			getStudentDbValue(conn);
 		}catch(ClassNotFoundException ex) {
@@ -1463,7 +1447,6 @@ public class login {
 			//从老师的行程表中取出所有发布的行程
 			ALLCal.clear();
 			sql = "select * from "+requestParam+"cal where Released = '1'";
-			//System.out.println(sql);
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				ALLCal.add(rs.getString("Date"));
@@ -1966,6 +1949,7 @@ public class login {
 	public void setAchName(String achName) {
 		this.achName = achName;
 	}
+	
 	public String getAchSource() {
 		return achSource;
 	}
@@ -1981,6 +1965,7 @@ public class login {
 	public String getAchEnd() {
 		return achEnd;
 	}
+	
 	public void setAchEnd(String achEnd) {
 		this.achEnd = achEnd;
 	}
@@ -1993,12 +1978,14 @@ public class login {
 	public String getAchRole() {
 		return achRole;
 	}
+	
 	public void setAchRole(String achRole) {
 		this.achRole = achRole;
 	}
 	public String getAchMoney() {
 		return achMoney;
 	}
+	
 	public void setAchMoney(String achMoney) {
 		this.achMoney = achMoney;
 	}
@@ -2008,8 +1995,5 @@ public class login {
 	public void setAchState(String achState) {
 		this.achState = achState;
 	}
-
 	
-	
-
 }

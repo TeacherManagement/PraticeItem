@@ -92,15 +92,15 @@ public class logup {
 			}
 			else {
 				sql = "insert into student (UserName,PassWord) values (\'" + username + "\',\'" + password + "\')";
-				stmt.execute(sql);
+				stmt.execute(sql);   //创建一个学生预约表
 				sql = "CREATE TABLE "+username+"books ("
-						+"BookID int unsigned primary key auto_increment,"
-						+"BookUser varchar(45) not null,"
-						+"BookName varchar(45),"
-						+"BookDate date not null,"
-						+"BookStart time not null,"
-						+"BookEnd time not null,"
-						+"BookItem varchar(200) not null"
+						+"BookID int unsigned primary key auto_increment,"//预约编号
+						+"BookUser varchar(45) not null,"   //预约的老师的用户名
+						+"BookName varchar(45),"     //老师的姓名
+						+"BookDate date not null,"   //预约日期
+						+"BookStart time not null,"    //预约开始时间
+						+"BookEnd time not null,"     //预约结束时间
+						+"BookItem varchar(200) not null"    //预约事项
 						+") charset=utf8;";
 				stmt.executeLargeUpdate(sql);
 			}
@@ -124,6 +124,7 @@ public class logup {
 			conn.close();
 		}
 	}
+	//封装
 	private String username;
 	private String password;
 	private String verifyPassword;
