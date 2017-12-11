@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../css/table.css">
 <title>学生主页</title>
 <style type="text/css">
 	.header {
@@ -141,7 +142,7 @@ function show(ele){
 		</ul>
 		<!--基本信息展示页 -->
 		<div id="showBasic" class="mainpage">
-			<table>
+			<table class="keywords">
 				<tr>
 					<th>姓名</th>
 					<td><p>${name }</p></td>
@@ -176,7 +177,8 @@ function show(ele){
 		<!--展示学生预约老师的页面 -->
 		<div id="showLearningDir" class="mainpage">
 			<%if (AllLea != null) {%>
-				<table>
+				<table class="keywords">
+					<thead>
 					<tr>
 						<th>预约老师</th>
 						<th>预约日期</th>
@@ -185,6 +187,8 @@ function show(ele){
 						<th>事项</th>
 						<th>状态</th>
 					</tr>
+					</thead>
+					<tbody>
 				<%for (int i=0;i < AllLea.size()/7;i++) {%>
 					<tr>
 						<td><%=AllLea.get(7*i+2) %></td>
@@ -192,13 +196,14 @@ function show(ele){
 						<td><%=AllLea.get(7*i+4) %></td>
 						<td><%=AllLea.get(7*i+5) %></td>
 						<td><%=AllLea.get(7*i+6) %></td>
-						<%if (AllLea.get(7*i+1).equals("1")) {%>
+						<%if (AllLea.get(7*i+1).equals("0")) {%>
 							<td>未被接受</td>
 						<%} else {%>
 							<td><b>已被接受</b></td>
 						<%} %>
 					</tr>
 				<%} %>
+				</tbody>
 				</table>
 			<%} %>
 		</div>

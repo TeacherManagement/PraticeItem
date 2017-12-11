@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../css/table.css">
 <title>学生主页</title>
 <style type="text/css">
 	.header {
@@ -222,12 +223,12 @@ function cancelLea() {
 		<ul>
 			<li><button onclick="show('Basic')" id="Basic">基本信息</button></li>
 			<li><button onclick="show('TeacherSearch')" id="TeacherSearch">教师检索</button></li>
-			<li><button onclick="show('LearningDir')" id="LearningDir">我的预约</button></li>
+			<li><button onclick="show('LearningDir')" id="LearningDir">我的预约及教师推荐</button></li>
 			<div class="clear"></div>
 		</ul>
 		<!--基本信息展示页 -->
 		<div id="showBasic" class="mainpage">
-			<table>
+			<table class="keywords">
 				<tr>
 					<th>姓名</th>
 					<td><p>${name }</p></td>
@@ -257,7 +258,7 @@ function cancelLea() {
 					<td><p>${telephone }</p></td>
 				</tr>
 			</table>
-			<button onclick="editBasic()" class="operation" style="position:relative;left:300px;">修改</button>
+			<button onclick="editBasic()" class="operation">修改</button>
 		</div>
 		<!--修改基本信息的页面 -->
 		<div id="editBasic" class="mainpage">
@@ -285,9 +286,12 @@ function cancelLea() {
 			<div id="NameSearchResults" class="mainpage">
 				<hr />
 				检索结果<br />
-				<table>
+				<table class="keywords">
 					<%if (NameList != null) {%>
+					<thead>
 					<tr><th>用户名</th><th>姓名</th><th>学校</th><th>学院</th><th>专业</th></tr>
+					</thead>
+					<tbody>
 					<%for (int i = 0;i < NameList.size()/5;i++) {%>
 						<tr>
 							<td><a href="/SEPractice/student/showTeacherPage.action?requestParam=<%=NameList.get(5*i)%>" style="text-decoration:none" target="_blank"><%=NameList.get(5*i) %></a></td>
@@ -297,6 +301,7 @@ function cancelLea() {
 							<td><%=NameList.get(5*i+4) %></td>
 						</tr>
 					<%} %>
+					</tbody>
 					<%} %>
 				</table>
 			</div>
@@ -324,9 +329,12 @@ function cancelLea() {
 			<%ArrayList<String> FilterList = (ArrayList<String>)request.getAttribute("FilterList");%>
 			<div id="FilterSearchResults" class="mainpage">
 				<h3>筛选结果</h3>
-				<table>
+				<table class="keywords">
 					<%if (FilterList != null) {%>
+					<thead>
 					<tr><th>用户名</th><th>姓名</th><th>学校</th><th>学院</th><th>专业</th></tr>
+					</thead>
+					<tbody>
 					<%for (int i = 0;i < FilterList.size()/5;i++) {%>
 						<tr>
 							<td><a href="/SEPractice/student/showTeacherPage.action?requestParam=<%=FilterList.get(5*i)%>" style="text-decoration:none" target="_blank"><%=FilterList.get(5*i) %></a></td>
@@ -336,6 +344,7 @@ function cancelLea() {
 							<td><%=FilterList.get(5*i+4) %></td>
 						</tr>
 					<%} %>
+					</tbody>
 					<%} %>
 				</table>
 			</div>
@@ -345,7 +354,8 @@ function cancelLea() {
 		<%ArrayList<String> AllLea = (ArrayList<String>)request.getAttribute("AllLea"); %>
 		<div id="showLearningDir" class="mainpage">
 			<%if (AllLea != null) {%>
-				<table>
+				<table class="keywords">
+					<thead>
 					<tr>
 						<th>预约老师</th>
 						<th>预约日期</th>
@@ -354,6 +364,8 @@ function cancelLea() {
 						<th>事项</th>
 						<th>状态</th>
 					</tr>
+					</thead>
+					<tbody>
 				<%for (int i=0;i < AllLea.size()/7;i++) {%>
 					<tr>
 						<td><%=AllLea.get(7*i+2) %></td>
@@ -361,23 +373,56 @@ function cancelLea() {
 						<td><%=AllLea.get(7*i+4) %></td>
 						<td><%=AllLea.get(7*i+5) %></td>
 						<td><%=AllLea.get(7*i+6) %></td>
-						<%if (AllLea.get(7*i+1).equals("1")) {%>
+						<%if (AllLea.get(7*i+1).equals("0")) {%>
 							<td>未被接受</td>
 						<%} else {%>
 							<td><b>已被接受</b></td>
 						<%} %>
 					</tr>
 				<%} %>
+				</tbody>
 				</table>
 			<%} %>
-			<button onclick="editLea()" class="operation">修改</button>
+			<button onclick="editLea()" class="operation" style="font-size:15px;">教师推荐</button>
 		</div>
-		<!--修改预约老师行程页面 -->
+		<%ArrayList<String> recommendTea = (ArrayList<String>)request.getAttribute("recommendTea"); %>
+		<!--展示推荐老师页面 -->
 		<div id="editLea" class="mainpage">
-			<form id="LeaInfo" action="/SEPractice/student/editLeaInfo">
-				
+			<!-- <form id="LeaInfo" action="/SEPractice/student/editLeaInfo">
 				<button onclick="saveLea()" class="operation">保存</button>
-			</form>
+			</form> -->
+			<%if (recommendTea != null) {%>
+			<table class="keywords">
+				<thead>
+					<tr>
+					<th>姓名</th>
+					<th>学校</th>
+					<th>学院</th>
+					<th>专业</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><a href="/SEPractice/student/showTeacherPage.action?requestParam=<%=recommendTea.get(5)%>" style="text-decoration:none" target="_blank"><%=recommendTea.get(6) %></a></td>
+						<td><%=recommendTea.get(7) %></td>
+						<td><%=recommendTea.get(8) %></td>
+						<td><%=recommendTea.get(9) %></td>
+					</tr>
+					<tr>
+						<td><a href="/SEPractice/student/showTeacherPage.action?requestParam=<%=recommendTea.get(10)%>" style="text-decoration:none" target="_blank"><%=recommendTea.get(11) %></a></td>
+						<td><%=recommendTea.get(12) %></td>
+						<td><%=recommendTea.get(13) %></td>
+						<td><%=recommendTea.get(14) %></td>
+					</tr>
+					<tr>
+						<td><a href="/SEPractice/student/showTeacherPage.action?requestParam=<%=recommendTea.get(0)%>" style="text-decoration:none" target="_blank"><%=recommendTea.get(1) %></a></td>
+						<td><%=recommendTea.get(2) %></td>
+						<td><%=recommendTea.get(3) %></td>
+						<td><%=recommendTea.get(3) %></td>
+					</tr>
+				</tbody>
+			</table>
+			<%} %>
 			<button onclick="cancelLea()" class="operation">取消</button>
 		</div>
 	</div>

@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../css/table.css">
 <title>教师主页</title>
 <style type="text/css">
 	.header {
@@ -163,7 +164,7 @@ function sureBook(){
 		</ul>
 		<!--基本信息展示页 -->
 		<div id="showBasic" class="mainpage">
-			<table>
+			<table class="keywords">
 				<tr>
 					<th>姓名</th>
 					<td><p>${name}</p></td>
@@ -206,15 +207,21 @@ function sureBook(){
 			<p id="EngAcademician" >${EngAcademician}</p>
 			<p id="YangtzeScholor">${YangtzeScholor}</p>
 			<p id="DrSupvisor">${DrSupvisor}</p>
-			<table>
+			<%if (teacherhonors != null) {%>
+			<table class="keywords">
+				<thead>
 				<tr><th>时间</th><th>荣誉奖励</th></tr>
+				</thead>
+				<tbody>
 				<%for (int i = 0;i < teacherhonors.size()/3;i++) {%>
 					<tr>
 						<td><%=teacherhonors.get(3*i+1) %></td>
 						<td><%=teacherhonors.get(3*i+2) %></td>
 					</tr>
 				<%} %>
+				</tbody>
 			</table>
+			<%} %>
 		</div>
 		<!--展示教师行程的页面 -->
 		<div id="showCal" class="mainpage">
@@ -222,8 +229,12 @@ function sureBook(){
 			<!-- 展示老师所有的行程，teachercals获取有关教师行程的一切信息 -->
 			<% ArrayList<String> teachercals = (ArrayList<String>)request.getAttribute("ALLCal"); %>
 			<% ArrayList<String> teachercalsid = (ArrayList<String>)request.getAttribute("AllCalID");%>
-			<table>
+			<%if (teachercals != null) {%>
+			<table class="keywords">
+				<thead>
 				<tr><th>日期</th><th>预约时间</th><th>结束时间</th><th>活动</th><th>预约状态</th></tr>
+				</thead>
+				<tbody>
 				<%for (int i = 0;i < teachercals.size()/5;i++) {%>
 					<tr>
 						<td><%out.println(teachercals.get(5*i+0)); %></td>
@@ -240,7 +251,9 @@ function sureBook(){
 						<%} %>
 					</tr>
 				<%} %>
+				</tbody>
 			</table>
+			<%} %>
 			<button id="bookButton" onclick="bookTeacher()">预约该教师</button>
 			<form action="SEPractice/student/bookTeacher" id="bookForm">
 				<hr />
@@ -256,11 +269,15 @@ function sureBook(){
 		<div id="showFund" class="mainpage">
 			<%if (AllFund != null) {%>
 				<%for (int i=0;i < AllFund.size()/5;i++) {%>
-					<table>
+					<table class="keywords">
+						<thead>
 						<tr><th colspan="2"><%=AllFund.get(5*i+1) %></th></tr>
+						</thead>
+						<tbody>
 						<tr><th>基金来源</th><td><%=AllFund.get(5*i+2) %></td></tr>
 						<tr><th>获得日期</th><td><%=AllFund.get(5*i+3) %></td></tr>
 						<tr><th>基金数额</th><td><%=AllFund.get(5*i+4) %></td></tr>
+						</tbody>
 					</table>
 				<%} %>
 			<%} %>
@@ -270,8 +287,11 @@ function sureBook(){
 		<div id="showAch" class="mainpage">
 			<%if (AllAch != null) {%>
 				<%for (int i=0;i < AllAch.size()/9;i++) {%>
-					<table>
+					<table class="keywords">
+						<thead>
 						<tr><th colspan="2"><%=AllAch.get(9*i+1) %></th></tr>
+						</thead>
+						<tbody>
 						<tr><th>项目来源</th><td><%=AllAch.get(9*i+2) %></td></tr>
 						<tr><th>开始时间</th><td><%=AllAch.get(9*i+3) %></td></tr>
 						<tr><th>结束时间</th><td><%=AllAch.get(9*i+4) %></td></tr>
@@ -279,6 +299,7 @@ function sureBook(){
 						<tr><th>项目类别</th><td><%=AllAch.get(9*i+6) %></td></tr>
 						<tr><th>项目经费</th><td><%=AllAch.get(9*i+7) %></td></tr>
 						<tr><th>项目状态</th><td><%=AllAch.get(9*i+8) %></td></tr>
+						</tbody>
 					</table>
 				<%} %>
 			<%} %>

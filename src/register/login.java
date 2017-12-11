@@ -8,10 +8,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.io.File;
 import java.io.IOException;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
-
 import com.opensymphony.xwork2.ActionSupport;
 //import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpSession;
@@ -19,8 +17,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ActionContext;
 
 //import com.opensymphony.xwork2.ActionContext;
-
-
 public class login {
 	
 	//登陆操作，根据用户名区分学生或老师身份
@@ -483,7 +479,6 @@ public class login {
 			username=(String) session.get("username");       //从session取得用户			
 			//发布教师行程表中指定id的行程
 			String sql = "update "+username+"cal set Released = '0' where CalID = '"+calID+"';";
-			//System.out.println(sql);
 			stmt.executeUpdate(sql);
 			
 			getTeacherDbValue(conn);
@@ -1074,7 +1069,7 @@ public class login {
 			DrSupvisor = "";
 		//从老师的行程表中取出所有行程
 		ALLCal.clear();
-		sql = "select * from "+username+"cal";
+		sql = "select * from "+username+"cal ORDER BY Date DESC,Time DESC";
 		rs = stmt.executeQuery(sql);
 		while (rs.next()) {
 			ALLCal.add(rs.getString("Date"));
@@ -1092,7 +1087,7 @@ public class login {
 		}
 		//取出老师所有的荣誉奖励
 		MyHonor.clear();
-		sql = "select * from "+username+"honor";
+		sql = "select * from "+username+"honor ORDER BY Date DESC";
 		rs = stmt.executeQuery(sql);
 		while (rs.next()) {
 			MyHonor.add(rs.getString("HonorID"));
@@ -1225,6 +1220,16 @@ public class login {
 			AllLea.add(rs.getString("BookStart"));
 			AllLea.add(rs.getString("BookEnd"));
 			AllLea.add(rs.getString("BookItem"));
+		}
+		sql = "select UserName,Name,School,Department,Major from teacher "
+				+"ORDER BY rand() limit 3";
+		rs = stmt.executeQuery(sql);
+		while (rs.next()) {
+			recommendTea.add(rs.getString("UserName"));
+			recommendTea.add(rs.getString("Name"));
+			recommendTea.add(rs.getString("School"));
+			recommendTea.add(rs.getString("Department"));
+			recommendTea.add(rs.getString("Major"));
 		}
 	}
 	public String editStudentLea() throws SQLException {
@@ -1462,8 +1467,8 @@ public class login {
 			}
 			//从老师的行程表中取出所有发布的行程
 			ALLCal.clear();
-			sql = "select * from "+requestParam+"cal where Released = '1'";
-			//System.out.println(sql);
+			sql = "select * from "+requestParam+"cal where Released = '1'"
+					+"ORDER BY Date DESC,Time DESC";
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				ALLCal.add(rs.getString("Date"));
@@ -1475,7 +1480,7 @@ public class login {
 				AllCalID.add(rs.getString("CalID"));
 			}
 			MyHonor.clear();
-			sql = "select * from "+requestParam+"honor";
+			sql = "select * from "+requestParam+"honor ORDER BY Date DESC";
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				MyHonor.add(rs.getString("HonorID"));
@@ -1658,7 +1663,8 @@ public class login {
 	private String newTime;//新添加行程的时间
 	private String newEndTime;
 	private String newBea;//新的行程
-	
+	//给学生推荐的老师
+	private ArrayList<String> recommendTea = new ArrayList<String>();
 	public String getNewEndTime() {
 		return newEndTime;
 	}
@@ -2008,7 +2014,12 @@ public class login {
 	public void setAchState(String achState) {
 		this.achState = achState;
 	}
-
+	public ArrayList<String> getRecommendTea() {
+		return recommendTea;
+	}
+	public void setRecommendTea(ArrayList<String> recommendTea) {
+		this.recommendTea = recommendTea;
+	}
 	
 	
 

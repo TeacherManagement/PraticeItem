@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../css/table.css">
 <title>教师主页</title>
 <style type="text/css">
 	.header {
@@ -98,16 +99,16 @@
 	.main #editCal [onclick="saveCal()"]{
 		display:none;
 		position:relative;
-		left:960px;
+		left:1030px;
 		top:-30px;
 	}
 	.main #editCal [onclick="cancelCal()"]{
 		position:relative;
-		left:500px;
+		left:1030px;
 	}
 	.main #editCal #addCalButton{
 		position:relative;
-		left:500px;
+		left:1030px;
 	}
 	.main #editCal #AddCal{
 		display:none;
@@ -412,6 +413,9 @@ function changeAch(id){
 	}
 	
 }
+$(function(){
+	  $('#keywords').tablesorter(); 
+	});
 </script>
 <script type = "text/javascript" src="${pageContext.request.contextPath}/My97DatePicker/WdatePicker.js"></script>
 </head>
@@ -442,7 +446,7 @@ function changeAch(id){
 		</ul>
 		<!--基本信息展示页 -->
 		<div id="showBasic" class="mainpage">
-			<table>
+			<table class="keywords">
 				<tr>
 					<th>姓名</th>
 					<td><p>${name}</p></td>
@@ -476,7 +480,7 @@ function changeAch(id){
 					<td><a href = "${homepage }" target = "_blank">${homepage }</a></td>
 				</tr>
 			</table>
-			<button onclick="editBasic()" class="operation" style="position:relative;left:300px;">修改</button>
+			<button onclick="editBasic()" class="operation" >修改</button>
 		</div>
 		<!--修改基本信息的页面 -->
 		<div id="editBasic" class="mainpage">
@@ -501,15 +505,19 @@ function changeAch(id){
 			<p id="EngAcademician" >${EngAcademician}</p>
 			<p id="YangtzeScholor">${YangtzeScholor}</p>
 			<p id="DrSupvisor">${DrSupvisor}</p>
-			<table>
+			<table class="keywords">
+				<thead>
 				<tr><th>时间</th><th>荣誉奖励</th></tr>
+				<thead>
 				<%if (teacherhonors != null) {%>
+				<tbody>
 				<%for (int i = 0;i < teacherhonors.size()/3;i++) {%>
 					<tr>
 						<td><%=teacherhonors.get(3*i+1) %></td>
 						<td><%=teacherhonors.get(3*i+2) %></td>
 					</tr>
 				<%} %>
+				<tbody>
 				<%} %>
 			</table>
 			<button onclick="editHonor()" class="operation">修改</button>
@@ -526,9 +534,12 @@ function changeAch(id){
 				<button onclick="saveHonor()"  style="position:relative;left:100px">保存</button>
 			</form>
 			<hr/>
-			<table>
+			<table class="keywords">
+				<thead>
 				<tr><th></th><th></th><th>时间</th><th>荣誉奖励</th></tr>
+				</thead>
 				<%if (teacherhonors != null) {%>
+				<tbody>
 				<%for (int i=0;i < teacherhonors.size()/3;i++) {%>
 					<tr>
 						<td>
@@ -548,6 +559,7 @@ function changeAch(id){
 
 					</tr>
 				<%} %>
+				</tbody>
 				<%} %>
 			</table>
 			<button onclick="addHonor()" class="operation" id="addHonorButton">添加</button>
@@ -567,20 +579,23 @@ function changeAch(id){
 		<% ArrayList<String> teachercalsid = (ArrayList<String>)request.getAttribute("AllCalID");%>
 		<!--展示教师行程的页面 -->
 		<div id="showCal" class="mainpage">
-			<table>
+			<table class="keywords" cellspacing="0" cellpadding="0">
+				<thead>
 				<tr>
-					<th>日期</th>
-					<th>时间</th>
-					<th>结束时间</th>
-					<th>活动</th>
-					<th>发布状态</th>
-					<th>预约状态</th>
+					<th><span>日期</span></th>
+					<th><span>时间</span></th>
+					<th><span>结束时间</span></th>
+					<th><span>活动</span></th>
+					<th><span>发布状态</span></th>
+					<th><span>预约状态</span></th>
 					<th></th>
 				</tr>
+				</thead>
 				<%if (teachercals != null) {%>
+				<tbody>
 				<%for (int i = 0;i < teachercals.size()/11;i++) {%>
 					<tr>
-						<td><%out.println(teachercals.get(11*i+0)); %></td>
+						<td class="lalign"><%out.println(teachercals.get(11*i+0)); %></td>
 						<td><%out.println(teachercals.get(11*i+1)); %></td>
 						<td><%out.println(teachercals.get(11*i+5)); %></td>
 						<td><%out.println(teachercals.get(11*i+2)); %></td>
@@ -619,6 +634,7 @@ function changeAch(id){
 						<%} %>
 					</tr>
 				<%} %>
+				</tbody>
 				<%} %>
 			</table>
 			<button onclick="editCal()" class="operation">修改</button>
@@ -630,7 +646,8 @@ function changeAch(id){
 			<div id="balCal">
 				<button onclick="cancelBatchPro()">取消</button>
 				<form id="batchCalForm" action="/SEPractice/teacher/batchCal">
-					<table>
+					<table class="keywords">
+						<thead>
 						<tr>
 							<th>选择</th>
 							<th>日期</th>
@@ -640,6 +657,7 @@ function changeAch(id){
 							<th>发布状态</th>
 							<th>预约状态</th>
 						</tr>
+						</thead>
 						<%if (teachercals != null) {%>
 						<%for (int i = 0;i < teachercals.size()/11;i++) {%>
 						<tr>
@@ -663,16 +681,20 @@ function changeAch(id){
 							<%} %>
 						</tr>
 				<%} %>
+				</tbody>
 				<%} %>
 					</table>
 				</form>
-				<button onclick="batchCalDel()">删除</button>
-				<button onclick="batchCalRel()">发布</button>
-				<button onclick="batchCalCancel()">取消发布</button>
+				<button onclick="batchCalDel()" style="position:relative;left:210px">删除</button>
+				<button onclick="batchCalRel()" style="position:relative;left:210px">发布</button>
+				<button onclick="batchCalCancel()"style="position:relative;left:210px">取消发布</button>
 			</div>
-			<table id = "originalCal">
+			<table id = "originalCal" class="keywords">
+				<thead>
 				<tr><th>日期</th><th>时间</th><th>结束时间</th><th>活动</th><th>发布状态</th><th>处理预约</th><th></th></tr>
+				</thead>
 				<%if (teachercals != null) {%>
+				<tbody>
 				<%for (int i = 0;i < teachercals.size()/11;i++) {%>
 					<tr>
 						<td><%out.println(teachercals.get(11*i+0)); %></td>
@@ -716,19 +738,23 @@ function changeAch(id){
 							String safront = "<a href=\"/SEPractice/teacher/deleteCalInfo.action?calID=";
 							String sarear = "\" onclick=\"delCal();return false;\" class=\"calsOperationOption\">删除行程</a>";
 							String element = safront+teachercalsid.get(i)+sarear;
-							//System.out.println(element);
 						%>
 						<td><%out.println(element); %></td>
 					</tr>
 				<%} %>
+				</tbody>
 				<%} %>
 			</table>
 			<button onclick="addCal()" class="operation" id="addCalButton">添加行程</button>
 			<form id="AddCal" action="/SEPractice/teacher/editCalInfo">
-					选择日期<input type="text" name="newDate" class="Wdate" onFocus="WdatePicker({lang:'zh-cn',readOnly:true})"/>
-					选择时间<input type="text" name="newTime" class="Wdate" onFocus="WdatePicker({lang:'zh-cn',dateFmt:'HH:mm',readOnly:true})"/>
-					结束时间<input type="text" name="newEndTime" class="Wdate" onFocus="WdatePicker({lang:'zh-cn',dateFmt:'HH:mm',readOnly:true})"/>
-					行程活动<input type="text" name="newBea"/>
+					<table class="keywords">
+					<tr>
+					<td>选择日期<input type="text" name="newDate" class="Wdate" onFocus="WdatePicker({lang:'zh-cn',readOnly:true})"/></td>
+					<td>选择时间<input type="text" name="newTime" class="Wdate" onFocus="WdatePicker({lang:'zh-cn',dateFmt:'HH:mm',readOnly:true})"/></td>
+					<td>结束时间<input type="text" name="newEndTime" class="Wdate" onFocus="WdatePicker({lang:'zh-cn',dateFmt:'HH:mm',readOnly:true})"/></td>
+					<td>行程活动<input type="text" name="newBea"/></td>
+					</tr>
+					</table>
 			</form>
 			<button onclick="saveCal()" class="operation" id="savecal">保存</button>
 			<br /><button onclick="cancelCal()" class="operation" id="cancelcal">取消</button>
@@ -739,11 +765,15 @@ function changeAch(id){
 		<div id="showFund" class="mainpage">
 			<%if (AllFund != null) {%>
 				<%for (int i=0;i < AllFund.size()/5;i++) {%>
-					<table>
+					<table class="keywords">
+						<thead>
 						<tr><th colspan="2"><%=AllFund.get(5*i+1) %></th></tr>
+						</thead>
+						<tbody>
 						<tr><th>基金来源</th><td><%=AllFund.get(5*i+2) %></td></tr>
 						<tr><th>获得日期</th><td><%=AllFund.get(5*i+3) %></td></tr>
 						<tr><th>基金数额</th><td><%=AllFund.get(5*i+4) %></td></tr>
+						</tbody>
 					</table>
 				<%} %>
 			<%} %>
@@ -811,8 +841,11 @@ function changeAch(id){
 		<div id="showAch" class="mainpage">
 			<%if (AllAch != null) {%>
 				<%for (int i=0;i < AllAch.size()/9;i++) {%>
-					<table>
+					<table class="keywords">
+						<thead>
 						<tr><th colspan="2"><%=AllAch.get(9*i+1) %></th></tr>
+						</thead>
+						<tbody>
 						<tr><th>项目来源</th><td><%=AllAch.get(9*i+2) %></td></tr>
 						<tr><th>开始时间</th><td><%=AllAch.get(9*i+3) %></td></tr>
 						<tr><th>结束时间</th><td><%=AllAch.get(9*i+4) %></td></tr>
@@ -820,6 +853,7 @@ function changeAch(id){
 						<tr><th>项目类别</th><td><%=AllAch.get(9*i+6) %></td></tr>
 						<tr><th>项目经费</th><td><%=AllAch.get(9*i+7) %></td></tr>
 						<tr><th>项目状态</th><td><%=AllAch.get(9*i+8) %></td></tr>
+						</tbody>
 					</table>
 				<%} %>
 			<%} %>
