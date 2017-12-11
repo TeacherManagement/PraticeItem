@@ -78,14 +78,10 @@ public class editBasicInfo {
 		this.homepage = homepage;
 	}
 	public String execute() throws SQLException, UnsupportedEncodingException {
-		/*HttpServletRequest req = null;
-		HttpServletResponse resp = null;
-		req.setCharacterEncoding("utf-8");
-		resp.setContentType("text/html;charset=utf-8");*/
+
 		Connection conn = null;
 		Statement stmt = null;
-		/*ResultSet rs1 = null,rs2 = null;
-		int exist = 0;*/
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306/sepractice?"
