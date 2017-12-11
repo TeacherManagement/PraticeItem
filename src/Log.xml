@@ -27,15 +27,7 @@
 			<result name="ERRORNOMATCH">/WEB-INF/LogJsp/LogupNoMatch.jsp</result>
 			
 		</action>
-        <!-- <action name="Login_*" method="{1}" class="example.Login">
-            <result name="input">/WEB-INF/jsp/example/Login.jsp</result>
-            <result type="redirectAction">Menu</result>
-        </action>
-
-
-        <action name="*" class="example.ExampleSupport"> 
-            <result>/WEB-INF/jsp/example/{1}.jsp</result> 
-        </action> --> 
+        
 
         <!-- Add actions here --> 
     </package> 
