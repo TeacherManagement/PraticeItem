@@ -216,7 +216,6 @@ function cancelBasic() {
 function editHonor(){
 	document.getElementById("editHonor").style.display = "block";
 	document.getElementById("showHonor").style.display = "none";
-	//document.getElementById("AllHonor").value = "暂未填写";
 }
 function saveHonor(){
 	document.getElementById("HonorInfo").submit;
@@ -243,8 +242,6 @@ function sureAddHonor(){
 	}
 	if (!confirm("确定添加这一条荣誉奖励吗？"))
 		return false;
-	//document.getElementById("addHonorForm").action="SEPractice/teacher/addHonorInfo";
-	//alert(document.getElementById("addHonorForm").action);
 	document.getElementById("addHonorForm").submit();
 }
 function changeHonor(){
@@ -345,27 +342,24 @@ function cancelBatchPro(){
 function batchCalDel(){
 	if (confirm("确定删除所有选中的行程吗？"))
 	{
-		var request = "/SEPractice/teacher/batchCalDel";
+		var request = "batchCalDel";
 		document.getElementById("batchCalForm").action = request;
-		//alert(document.getElementById("batchCalForm").action);
 		document.getElementById("batchCalForm").submit();
 	}
 }
 function batchCalRel(){
 	if (confirm("确定发布选中的所有行程吗"))
 	{
-		var request = "/SEPractice/teacher/batchCalRel";
+		var request = "batchCalRel";
 		document.getElementById("batchCalForm").action = request;
-		//alert(document.getElementById("batchCalForm").action);
 		document.getElementById("batchCalForm").submit();
 	}
 }
 function batchCalCancel(){
 	if (confirm("确定取消发布所选中的行程吗？"))
 	{
-		var request = "/SEPractice/teacher/batchCalCancelRel";
+		var request = "batchCalCancelRel";
 		document.getElementById("batchCalForm").action = request;
-		//alert(document.getElementById("batchCalForm").action);
 		document.getElementById("batchCalForm").submit();
 	}
 }
@@ -413,9 +407,6 @@ function changeAch(id){
 	}
 	
 }
-$(function(){
-	  $('#keywords').tablesorter(); 
-	});
 </script>
 <script type = "text/javascript" src="${pageContext.request.contextPath}/My97DatePicker/WdatePicker.js"></script>
 </head>
@@ -484,7 +475,7 @@ $(function(){
 		</div>
 		<!--修改基本信息的页面 -->
 		<div id="editBasic" class="mainpage">
-			<form id="BasicInfo" action="/SEPractice/teacher/editBasicInfo">
+			<form id="BasicInfo" action="editBasicInfo">
 				&nbsp;&nbsp;&nbsp;姓名&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="name" value="${name}"></input><br />
 				&nbsp;&nbsp;&nbsp;学校&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="school" value="${school}"></input><br />
 				&nbsp;&nbsp;&nbsp;性别&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="sex" value="male" style="height:15px" checked>男
@@ -494,17 +485,24 @@ $(function(){
 				&nbsp;&nbsp;&nbsp;专业&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="major" value="${major}"></input><br />
 				&nbsp;&nbsp;&nbsp;电话&nbsp;&nbsp;&nbsp;&nbsp;<input type="tel" name="telephone" value="${telephone}"></input><br />
 				教师主页<input type="url" name="homepage" value="${homepage}"></input><br />
-				<button  onclick="saveBasic()" class="operation" style="position:relative;left:300px;">保存</button>
+				<button  onclick="saveBasic()" class="operation" style="position:relative;left:230px;">保存</button>
 			</form>
-			<button onclick="cancelBasic()" class="operation" style="position:absolute;left:400px;top:645px">取消</button>
+			<button onclick="cancelBasic()" class="operation">取消</button>
 		</div>
 		<%ArrayList<String> teacherhonors = (ArrayList<String>)request.getAttribute("MyHonor"); %>
 		<!--荣誉称号展示的页面 -->
 		<div id="showHonor" class="mainpage">
+			<table class="keywords">
+			<thead>
+				<tr><th>荣誉称号</th></tr>
+			</thead>
+			<tr><td>
 			<p id="SciAcademician" >${SciAcademician}</p>
 			<p id="EngAcademician" >${EngAcademician}</p>
 			<p id="YangtzeScholor">${YangtzeScholor}</p>
 			<p id="DrSupvisor">${DrSupvisor}</p>
+			</td></tr>
+			</table>
 			<table class="keywords">
 				<thead>
 				<tr><th>时间</th><th>荣誉奖励</th></tr>
@@ -526,12 +524,24 @@ $(function(){
 		<div id="editHonor" class="mainpage">
 		
 			<%--修改教师四大名誉称号的信息 --%>
-			<form id="HonorInfo" action="/SEPractice/teacher/editHonorInfo">
-				<input id="inputSciAcademician" type="checkbox" value="SA" name="SciAcademician" />科学院院士<br />
-				<input id="inputEngAcademician" type="checkbox" value="EA" name="EngAcademician" />工程院院士<br />
-				<input id="inputYangtzeScholor" type="checkbox" value="YS" name="YangtzeScholor" />长江学者<br />
-				<input id="inputDrSupvisor" type="checkbox" value="DS" name="DrSupvisor" />博士生导师<br />
-				<button onclick="saveHonor()"  style="position:relative;left:100px">保存</button>
+			<form id="HonorInfo" action="editHonorInfo">
+				<table class="keywords">
+				<tr>
+				<td><input id="inputSciAcademician" type="checkbox" value="SA" name="SciAcademician" /></td>
+				<td>科学院院士</td>
+				</tr><tr>
+				<td><input id="inputEngAcademician" type="checkbox" value="EA" name="EngAcademician" /></td>
+				<td>工程院院士</td>
+				</tr><tr>
+				<td><input id="inputYangtzeScholor" type="checkbox" value="YS" name="YangtzeScholor" /></td>
+				<td>长江学者</td>
+				</tr><tr>
+				<td><input id="inputDrSupvisor" type="checkbox" value="DS" name="DrSupvisor" /></td>
+				<td>博士生导师</td>
+				</tr><tr>
+				<td colspan="2"><button onclick="saveHonor()"  style="position:relative;left:100px">保存</button></td>
+				</tr>
+				</table>
 			</form>
 			<hr/>
 			<table class="keywords">
@@ -543,13 +553,13 @@ $(function(){
 				<%for (int i=0;i < teacherhonors.size()/3;i++) {%>
 					<tr>
 						<td>
-							<form action="/SEPractice/teacher/delHonorInfo">
+							<form action="delHonorInfo">
 								<input type="hidden" name="honorID" value="<%=teacherhonors.get(3*i)%>">
 								<button onclick="delHonor();return false;">删除</button>
 							</form>
 						</td>
 						<td colspan="3">
-							<form action="/SEPractice/teacher/changeHonorInfo">
+							<form action="changeHonorInfo">
 								<input type="hidden" name="honorID" value="<%=teacherhonors.get(3*i)%>">
 								<input type="text" name="honorDate" value="<%=teacherhonors.get(3*i+1) %>" class="Wdate" onFocus="WdatePicker({lang:'zh-cn',dateFmt:'yyyy年',readOnly:true})"/>
 								<input type="text" name="honorItem" value="<%=teacherhonors.get(3*i+2) %>"/>
@@ -563,7 +573,7 @@ $(function(){
 				<%} %>
 			</table>
 			<button onclick="addHonor()" class="operation" id="addHonorButton">添加</button>
-			<form action="/SEPractice/teacher/addHonorInfo" id="addHonorForm">
+			<form action="addHonorInfo" id="addHonorForm">
 				时间：<input type="text" name="honorDate" class="Wdate" onFocus="WdatePicker({lang:'zh-cn',dateFmt:'yyyy年',readOnly:true})" />
 				荣誉奖励：<input type="text" name="honorItem" />
 				<button onclick="sureAddHonor();return false;">确定添加</button>
@@ -612,7 +622,7 @@ $(function(){
 							<td>
 								<button id="dB<%=teachercalsid.get(i)%>" class="detailButton" onclick="studentDetail('<%="bookID"+teachercalsid.get(i)%>','<%="dB"+teachercalsid.get(i)%>')">详情</button>
 								<div id="bookID<%=teachercalsid.get(i)%>" class="studentBooks">
-									<a href="/SEPractice/teacher/showStudent?StudentUser=<%=teachercals.get(11*i+6) %>" target="_blank"><%=teachercals.get(11*i+6) %></a>
+									<a href="showStudent?StudentUser=<%=teachercals.get(11*i+6) %>" target="_blank"><%=teachercals.get(11*i+6) %></a>
 									&nbsp;<%=teachercals.get(11*i+7) %>
 									&nbsp;<%=teachercals.get(11*i+8) %>
 									&nbsp;<%=teachercals.get(11*i+9) %>
@@ -624,7 +634,7 @@ $(function(){
 							<td>
 								<button id="dB<%=teachercalsid.get(i)%>" class="detailButton" onclick="studentDetail('<%="bookID"+teachercalsid.get(i)%>','<%="dB"+teachercalsid.get(i)%>')">详情</button>
 								<div id="bookID<%=teachercalsid.get(i)%>" class="studentBooks">
-									<a href="/SEPractice/teacher/showStudent?StudentUser=<%=teachercals.get(11*i+6) %>" target="_blank"><%=teachercals.get(11*i+6) %></a>
+									<a href="showStudent?StudentUser=<%=teachercals.get(11*i+6) %>" target="_blank"><%=teachercals.get(11*i+6) %></a>
 									&nbsp;<%=teachercals.get(11*i+7) %>
 									&nbsp;<%=teachercals.get(11*i+8) %>
 									&nbsp;<%=teachercals.get(11*i+9) %>
@@ -645,7 +655,7 @@ $(function(){
 			<%--批量处理页面 --%>
 			<div id="balCal">
 				<button onclick="cancelBatchPro()">取消</button>
-				<form id="batchCalForm" action="/SEPractice/teacher/batchCal">
+				<form id="batchCalForm" action="batchCal">
 					<table class="keywords">
 						<thead>
 						<tr>
@@ -703,14 +713,14 @@ $(function(){
 						<td><%out.println(teachercals.get(11*i+2)); %></td>
 						<%if (teachercals.get(11*i+3) == null || teachercals.get(11*i+3).equals("0")) {%>
 							<%
-							String safront = "<a href=\"/SEPractice/teacher/releaseCalInfo.action?calID=";
+							String safront = "<a href=\"releaseCalInfo?calID=";
 							String sarear = "\" onclick=\"relCal();return false;\" class=\"calsOperationOption\">发布</a>";
 							String element = safront+teachercalsid.get(i)+sarear;
 							%>
 							<td><%out.println(element); %></td>
 						<%} else{%>
 							<%
-							String safront = "<a href=\"/SEPractice/teacher/cancelrelCalInfo.action?calID=";
+							String safront = "<a href=\"cancelrelCalInfo?calID=";
 							String sarear = "\" onclick=\"cancelrelCal();return false;\" class=\"calsOperationOption\">取消发布</a>";
 							String element = safront+teachercalsid.get(i)+sarear;
 							%>
@@ -721,21 +731,21 @@ $(function(){
 						<%} 
 						else if(teachercals.get(11*i+4).equals("0")) {%>
 							<%
-							String safront = "<a href=\"/SEPractice/teacher/acceptCalInfo.action?calID=";
+							String safront = "<a href=\"acceptCalInfo?calID=";
 							String sarear = "\" onclick=\"acceptCal();return false;\" class=\"calsOperationOption\">接受预约</a>";
 							String element = safront+teachercalsid.get(i)+sarear;
 							%>
 							<td><%out.println(element); %></td>
 						<%} else{%>
 							<%
-							String safront = "<a href=\"/SEPractice/teacher/rejectCalInfo.action?calID=";
+							String safront = "<a href=\"rejectCalInfo?calID=";
 							String sarear = "\" onclick=\"rejectCal();return false;\" class=\"calsOperationOption\">拒绝预约</a>";
 							String element = safront+teachercalsid.get(i)+sarear;
 							%>
 							<td><%out.println(element); %></td>
 						<%} %>
 						<%
-							String safront = "<a href=\"/SEPractice/teacher/deleteCalInfo.action?calID=";
+							String safront = "<a href=\"deleteCalInfo?calID=";
 							String sarear = "\" onclick=\"delCal();return false;\" class=\"calsOperationOption\">删除行程</a>";
 							String element = safront+teachercalsid.get(i)+sarear;
 						%>
@@ -746,7 +756,7 @@ $(function(){
 				<%} %>
 			</table>
 			<button onclick="addCal()" class="operation" id="addCalButton">添加行程</button>
-			<form id="AddCal" action="/SEPractice/teacher/editCalInfo">
+			<form id="AddCal" action="editCalInfo">
 					<table class="keywords">
 					<tr>
 					<td>选择日期<input type="text" name="newDate" class="Wdate" onFocus="WdatePicker({lang:'zh-cn',readOnly:true})"/></td>
@@ -783,7 +793,7 @@ $(function(){
 		<div id="editFund" class="mainpage">
 			<%if (AllFund != null) {%>
 			<%for (int i=0;i < AllFund.size()/5;i++) {%>
-			<form id="FundInfo" action="/SEPractice/teacher/editFundInfo">
+			<form id="FundInfo" action="editFundInfo">
 				<input type="hidden" name="fundID" value="<%=AllFund.get(5*i) %>"/>
 				<table>
 				<tr>
@@ -805,14 +815,14 @@ $(function(){
 				</table>
 				<button onclick="saveFund()" class="operation" style="font-size:16px">确认修改</button>
 			</form>
-			<form action="/SEPractice/teacher/delFundInfo">
+			<form action="delFundInfo">
 				<input type="hidden" name="fundID" value="<%=AllFund.get(5*i) %>"/>
 				<button style="position:relative;left:200px;">删除</button>
 			</form>
 			<%} %>
 			<%} %>
 			<hr/>
-			<form action="/SEPractice/teacher/addFundInfo">
+			<form action="addFundInfo">
 				<table>
 				<tr>
 				<th>基金名称</th>
@@ -865,11 +875,11 @@ $(function(){
 			<%for (int i=0;i < AllAch.size()/9;i++) {%>
 			<br /><button id="changeAchButton<%=AllAch.get(9*i)%>" onclick="changeAch('<%=AllAch.get(9*i)%>')">修改</button>
 			<b id="AchName<%=AllAch.get(9*i)%>" ><%=AllAch.get(9*i+1) %></b>
-			<form action="/SEPractice/teacher/delAchInfo">
+			<form action="delAchInfo">
 				<input type="hidden" name="achID" value="<%=AllAch.get(9*i)%>">
 				<button style="position:relative;left:200px;">删除</button>
 			</form>
-			<form id="AchInfo<%=AllAch.get(9*i)%>" class="AchForm" action="/SEPractice/teacher/editAchInfo">
+			<form id="AchInfo<%=AllAch.get(9*i)%>" class="AchForm" action="editAchInfo">
 				<input type="hidden" name="achID" value="<%=AllAch.get(9*i)%>">
 				<table>
 				<tr><th>项目名称：</th>
@@ -898,7 +908,7 @@ $(function(){
 			<%} %>
 			<%} %>
 			<hr/>
-			<form action="/SEPractice/teacher/addAchInfo">
+			<form action="addAchInfo">
 				项目名称：<input type="text" name="achName" />
 				<br/>项目来源：<input type="text" name="achSource" />
 				<br/>起始时间：<input type="text" name="achStart" class="Wdate" onFocus="WdatePicker({lang:'zh-cn',readOnly:true})"/>

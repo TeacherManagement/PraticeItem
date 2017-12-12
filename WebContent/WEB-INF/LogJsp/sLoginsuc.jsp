@@ -200,7 +200,6 @@ function cancelLea() {
 	document.getElementById("editLea").style.display = "none";
 	document.getElementById("showLearningDir").style.display = "block";
 }
-
 </script>
 </head>
 
@@ -262,7 +261,7 @@ function cancelLea() {
 		</div>
 		<!--修改基本信息的页面 -->
 		<div id="editBasic" class="mainpage">
-			<form id="BasicInfo" action="/SEPractice/student/editBasicInfo">
+			<form id="BasicInfo" action="editsBasicInfo">
 				&nbsp;&nbsp;&nbsp;姓名&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="name" value="${name}"></input><br />
 				&nbsp;&nbsp;&nbsp;学校&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="school" value="${school}"></input><br />
 				&nbsp;&nbsp;&nbsp;性别&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="sex" value="male" style="height:15px" checked>男
@@ -277,7 +276,7 @@ function cancelLea() {
 		</div>
 		<!--教师检索的页面 -->
 		<div id="showTeacherSearch" class="mainpage">
-			<form id="nameSea" action="/SEPractice/student/nameSearch">
+			<form id="nameSea" action="nameSearch">
 				教师名字：<input type="text" name="teacherName" style="height:35px;" placeholder="教师姓名" value="${teacherName}">
 				<button onclick="seaName()" name="exeNameSearch" value="eNS" class="operation" style="position:relative;top:5px;">搜索</button>
 			</form>
@@ -294,7 +293,7 @@ function cancelLea() {
 					<tbody>
 					<%for (int i = 0;i < NameList.size()/5;i++) {%>
 						<tr>
-							<td><a href="/SEPractice/student/showTeacherPage.action?requestParam=<%=NameList.get(5*i)%>" style="text-decoration:none" target="_blank"><%=NameList.get(5*i) %></a></td>
+							<td><a href="showTeacherPage.action?requestParam=<%=NameList.get(5*i)%>" style="text-decoration:none" target="_blank"><%=NameList.get(5*i) %></a></td>
 							<td><%=NameList.get(5*i+1) %></td>
 							<td><%=NameList.get(5*i+2) %></td>
 							<td><%=NameList.get(5*i+3) %></td>
@@ -310,14 +309,7 @@ function cancelLea() {
 		</div>
 		<!--教师高级检索的页面 -->
 		<div id="seniorSea" class="mainpage">
-			<form id="filterOption" action="/SEPractice/student/filterSearch">
-				<!-- <input list="options" multiple>
-					<datalist id="options">
-						<option value="科学院院士">
-						<option value="工程院院士">
-						<option value="长江学者">
-						<option value="博士生导师">
-					</datalist>  -->
+			<form id="filterOption" action="filterSearch">
 					<h3>筛选条件</h3>
 					<input type="checkbox" name="SciAcademician" value="SA">科学院院士
 					<input type="checkbox" name="EngAcademician" value="EA">工程院院士
@@ -337,7 +329,7 @@ function cancelLea() {
 					<tbody>
 					<%for (int i = 0;i < FilterList.size()/5;i++) {%>
 						<tr>
-							<td><a href="/SEPractice/student/showTeacherPage.action?requestParam=<%=FilterList.get(5*i)%>" style="text-decoration:none" target="_blank"><%=FilterList.get(5*i) %></a></td>
+							<td><a href="showTeacherPage.action?requestParam=<%=FilterList.get(5*i)%>" style="text-decoration:none" target="_blank"><%=FilterList.get(5*i) %></a></td>
 							<td><%=FilterList.get(5*i+1) %></td>
 							<td><%=FilterList.get(5*i+2) %></td>
 							<td><%=FilterList.get(5*i+3) %></td>
@@ -403,19 +395,19 @@ function cancelLea() {
 				</thead>
 				<tbody>
 					<tr>
-						<td><a href="/SEPractice/student/showTeacherPage.action?requestParam=<%=recommendTea.get(5)%>" style="text-decoration:none" target="_blank"><%=recommendTea.get(6) %></a></td>
+						<td><a href="showTeacherPage.action?requestParam=<%=recommendTea.get(5)%>" style="text-decoration:none" target="_blank"><%=recommendTea.get(6) %></a></td>
 						<td><%=recommendTea.get(7) %></td>
 						<td><%=recommendTea.get(8) %></td>
 						<td><%=recommendTea.get(9) %></td>
 					</tr>
 					<tr>
-						<td><a href="/SEPractice/student/showTeacherPage.action?requestParam=<%=recommendTea.get(10)%>" style="text-decoration:none" target="_blank"><%=recommendTea.get(11) %></a></td>
+						<td><a href="showTeacherPage.action?requestParam=<%=recommendTea.get(10)%>" style="text-decoration:none" target="_blank"><%=recommendTea.get(11) %></a></td>
 						<td><%=recommendTea.get(12) %></td>
 						<td><%=recommendTea.get(13) %></td>
 						<td><%=recommendTea.get(14) %></td>
 					</tr>
 					<tr>
-						<td><a href="/SEPractice/student/showTeacherPage.action?requestParam=<%=recommendTea.get(0)%>" style="text-decoration:none" target="_blank"><%=recommendTea.get(1) %></a></td>
+						<td><a href="showTeacherPage.action?requestParam=<%=recommendTea.get(0)%>" style="text-decoration:none" target="_blank"><%=recommendTea.get(1) %></a></td>
 						<td><%=recommendTea.get(2) %></td>
 						<td><%=recommendTea.get(3) %></td>
 						<td><%=recommendTea.get(3) %></td>
@@ -426,8 +418,6 @@ function cancelLea() {
 			<button onclick="cancelLea()" class="operation">取消</button>
 		</div>
 	</div>
-	
-	
 	<div class="footer">
 		<h3>教师信息管理系统小组</h3>
 	</div>

@@ -203,10 +203,17 @@ function sureBook(){
 		<!--荣誉称号展示的页面 -->
 		<%ArrayList<String> teacherhonors = (ArrayList<String>)request.getAttribute("MyHonor"); %>
 		<div id="showHonor" class="mainpage">
+			<table class="keywords">
+			<thead>
+				<tr><th>荣誉称号</th></tr>
+			</thead>
+			<tr><td>
 			<p id="SciAcademician" >${SciAcademician}</p>
 			<p id="EngAcademician" >${EngAcademician}</p>
 			<p id="YangtzeScholor">${YangtzeScholor}</p>
 			<p id="DrSupvisor">${DrSupvisor}</p>
+			</td></tr>
+			</table>
 			<%if (teacherhonors != null) {%>
 			<table class="keywords">
 				<thead>

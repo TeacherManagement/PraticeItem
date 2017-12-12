@@ -5,7 +5,6 @@
 <struts>
 
     <package name="teacher" namespace="/teacher" extends="default">
-		<!-- <action name="editBasicInfo" class="teacherOp.editBasicInfo"> -->
 		<action name="editBasicInfo" class="register.login" method="editTeacherBasic">
         	<result name="SUCCESS">/WEB-INF/LogJsp/tLoginsuc.jsp</result>
         </action>

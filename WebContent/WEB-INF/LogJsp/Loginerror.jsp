@@ -22,7 +22,7 @@
 	}
 	.log{
 		width:250px;
-		height:270px;
+		height:280px;
 		border:1px solid black;
 		background-color:black;
 		opacity:0.7;

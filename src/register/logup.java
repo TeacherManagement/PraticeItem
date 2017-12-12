@@ -1,5 +1,4 @@
 package register;
-
 //import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,10 +17,10 @@ public class logup {
 		int exist = 0;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			if (!password.equals(verifyPassword))
@@ -55,7 +54,6 @@ public class logup {
 						+ "BookDepartment varchar(20),"
 						+ "BookMajor varchar(20) "
 						+ ") charset=utf8;";
-				//System.out.println(sql);
 				if(0 != stmt.executeLargeUpdate(sql))
 						System.out.println("something wrong!!");
 				//老师有额外的荣誉奖励表

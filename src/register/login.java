@@ -10,17 +10,12 @@ import java.io.File;
 import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
-import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ActionContext;
+//import com.opensymphony.xwork2.ActionSupport;
 //import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpSession;
 
-import com.opensymphony.xwork2.ActionContext;
-
-//import com.opensymphony.xwork2.ActionContext;
-
-
 //老师和学生登录之后的所有可选操作
-
 public class login {
 	
 	//登陆操作，根据用户名区分学生或老师身份
@@ -30,10 +25,12 @@ public class login {
 		ResultSet rs1 = null,rs2 = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); 
-			String url = "jdbc:mysql://localhost:3306/sepractice?" 
-					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false"; 
-			String user = "root"; 
-			String psw = "5810267"; 
+			/*String url = "jdbc:mysql://localhost:3306/sepractice?" 
+					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";*/
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
+					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3"; 
 			conn = DriverManager.getConnection(url,user,psw); 
 			stmt = conn.createStatement(); 
 			String sql="select PassWord from teacher where UserName = \'"+username + "\'";
@@ -90,10 +87,10 @@ public class login {
 		ResultSet rst=null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			String sql = "select Name from teacher where UserName = '"+username+"';";
@@ -134,10 +131,10 @@ public class login {
 		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
@@ -180,10 +177,10 @@ public class login {
 		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
@@ -192,16 +189,11 @@ public class login {
 			username=(String) session.get("username");       //从session取得用户			
 			//更新基本信息的数据库
 			String sql;
-			//String sql = "update teacher set AcademicTitle =\"" + MyHonor + "\" where UserName=\'"+username+"\'";
-
-			
 			if (SciAcademician != null && SciAcademician.equals("SA"))
 				sql = "update teacher set SciAcademician=1 where UserName=\'"+username+"\'";
 			else
 				sql = "update teacher set SciAcademician=0 where UserName=\'"+username+"\'";
-
 			stmt.executeUpdate(sql);
-			
 			if (EngAcademician != null && EngAcademician.equals("EA"))
 				sql = "update teacher set EngAcademician=1 where UserName=\'"+username+"\'";
 			else
@@ -239,10 +231,10 @@ public class login {
 		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
@@ -273,10 +265,10 @@ public class login {
 		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
@@ -288,7 +280,6 @@ public class login {
 						+honorDate+"',HonorItem='"
 						+honorItem+"' where HonorID='"+honorID+"';";
 			stmt.executeUpdate(sql);
-			
 			getTeacherDbValue(conn);
 			return "SUCCESS";
 		}catch(ClassNotFoundException ex) {
@@ -302,17 +293,16 @@ public class login {
 		}finally {
 			conn.close();
 		}
-		
 	}
 	public String delTeacherHonor() throws SQLException {
 		Connection conn = null;
 		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
@@ -344,10 +334,10 @@ public class login {
 		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
@@ -383,10 +373,10 @@ public class login {
 		ResultSet rs = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
@@ -426,10 +416,10 @@ public class login {
 		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
@@ -460,10 +450,10 @@ public class login {
 		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
@@ -495,10 +485,10 @@ public class login {
 		ResultSet rs = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
@@ -546,10 +536,10 @@ public class login {
 		ResultSet rs = null; 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
@@ -596,10 +586,10 @@ public class login {
 		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
@@ -631,10 +621,10 @@ public class login {
 		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
@@ -666,10 +656,10 @@ public class login {
 		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
@@ -701,10 +691,10 @@ public class login {
 		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
@@ -738,10 +728,10 @@ public class login {
 		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
@@ -771,10 +761,10 @@ public class login {
 		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
@@ -809,10 +799,10 @@ public class login {
 		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
@@ -842,10 +832,10 @@ public class login {
 		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
@@ -884,10 +874,10 @@ public class login {
 		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
@@ -926,10 +916,10 @@ public class login {
 		ResultSet rs = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 		    stmt = conn.createStatement();
 		  //将被访问的学生存起来，以便以后取用
@@ -1002,7 +992,7 @@ public class login {
 		ResultSet rs = null;
 		stmt = conn.createStatement();
 		String sql="";
-		sql="select * from teacher where UserName = \'"+username+"\'";
+		sql="select * from teacher where UserName = '"+username+"'";
 		rs = stmt.executeQuery(sql);
 		rs.next();
 		name = rs.getString("Name");
@@ -1122,10 +1112,10 @@ public class login {
 		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
@@ -1228,10 +1218,10 @@ public class login {
 		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
@@ -1265,10 +1255,10 @@ public class login {
 		ResultSet rs = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 		    stmt = conn.createStatement();
 			//取得用户名
@@ -1304,19 +1294,16 @@ public class login {
 		ResultSet rs = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 			stmt = conn.createStatement();
 			//取得用户名
 			ActionContext actionContext = ActionContext.getContext();   //取到struts容器
 			Map<String, Object> session = actionContext.getSession();    //取得session
 			username=(String) session.get("username");       //从session取得用户
-			
-			
-			//System.out.println("alert");
 			String sql = "select * from teacher where ";
 			int first=0;
 			if (SciAcademician != null || EngAcademician != null || YangtzeScholor != null || DrSupvisor != null)
@@ -1382,10 +1369,10 @@ public class login {
 		ResultSet rs = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 		    stmt = conn.createStatement();
 		  //将被访问的老师存起来，以便以后取用
@@ -1462,7 +1449,6 @@ public class login {
 				ALLCal.add(rs.getString("Date"));
 				ALLCal.add(rs.getString("Time"));
 				ALLCal.add(rs.getString("Bea"));
-				//ALLCal.add(rs.getString("Released"));
 				ALLCal.add(rs.getString("Booked"));
 				ALLCal.add(rs.getString("EndTime"));
 				AllCalID.add(rs.getString("CalID"));
@@ -1518,10 +1504,10 @@ public class login {
 		ResultSet rs = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/sepractice?"
+			String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3306/app_4class7?" 
 					+ "useUnicode=true&characterEncoding=utf-8&useSSL=false";
-			String user = "root";
-			String psw = "5810267";
+			String user = "wmlllo02jx"; 
+			String psw = "44kz23j44y3m04wjh0iwy42y2wz4i0m0hl0524y3";
 			conn = DriverManager.getConnection(url,user,psw);
 		    stmt = conn.createStatement();
 			//取得用户名
